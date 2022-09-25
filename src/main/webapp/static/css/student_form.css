@@ -1,0 +1,47 @@
+﻿body{
+    font-family: 'Inter', sans-serif;
+}
+.card-up{
+    height: 120px;
+    background-color:rgb(10, 104, 159);
+    /*overflow: hidden;*/
+}
+.avatar{
+    width:200px;
+    height:200px;
+    margin-top: -100px;
+    vertical-align: middle;
+    background-color: white;
+    border: 4px  solid rgba(51, 51, 51, 0.316) !important;
+    border-radius: 50%;
+    padding: 3px;
+}
+.avatar img{
+    object-fit: cover;
+}
+
+.avatar>#btn-upload{
+    color:rgb(10, 104, 159);
+    /* background-color: rgba(255, 255, 255, 0.794);  */
+    background-color: rgba(255, 255, 255, 0.878);
+    border: solid rgba(235, 235, 235, 0.639) 1px;
+    transform: translate(-150%, -100%);
+}
+.avatar>#btn-upload:hover{
+    color:rgb(10, 104, 159);
+    /* background-color: rgba(255, 255, 255, 0.794);  */
+    background-color: white  !important;
+}
+.form-btn{
+    background-color: rgb(25, 133, 195);
+}
+.form-btn:hover{
+    background-color: rgb(24, 116, 169) !important;
+    transform: translateY(-1px);
+    transition: transform 200ms;
+}
+
+.btn-lang{
+    background: white;
+    color: green;
+}
