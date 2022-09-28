@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
@@ -25,6 +26,7 @@ public class ParamService {
 
     @Autowired
     ServletContext context;
+
     private Optional<String> getParam(String name) {
         Objects.requireNonNull(name);
         return Optional.ofNullable(request.getParameter(name)).filter(s -> !s.isEmpty());
@@ -32,6 +34,7 @@ public class ParamService {
 
     /**
      * Đọc chuỗi giá trị của tham số
+     *
      * @param name         tên tham số
      * @param defaultValue giá trị mặc định
      * @return giá trị tham số hoặc giá trị mặc định nếu không tồn tại
@@ -43,6 +46,7 @@ public class ParamService {
 
     /**
      * Đọc số nguyên giá trị của tham số
+     *
      * @param name         tên tham số
      * @param defaultValue giá trị mặc định
      * @return giá trị tham số hoặc giá trị mặc định nếu không tồn tại
@@ -54,6 +58,7 @@ public class ParamService {
 
     /**
      * Đọc số thực giá trị của tham số
+     *
      * @param name         tên tham số
      * @param defaultValue giá trị mặc định
      * @return giá trị tham số hoặc giá trị mặc định nếu không tồn tại
@@ -65,7 +70,8 @@ public class ParamService {
 
     /**
      * Đọc giá trị boolean của tham số
-     * @param name tên tham số
+     *
+     * @param name         tên tham số
      * @param defaultValue giá trị mặc định
      * @return giá trị tham số hoặc giá trị mặc định nếu không tồn tại
      */
@@ -76,12 +82,13 @@ public class ParamService {
 
     /**
      * Đọc giá trị thời gian của tham số
+     *
      * @param name    tên tham số
      * @param pattern là định dạng thời gian
      * @return giá trị tham số hoặc null nếu không tồn tại
      * @throws RuntimeException lỗi sai định dạng
      */
-    public Date getDate(String name, String pattern) throws RuntimeException{
+    public Date getDate(String name, String pattern) throws RuntimeException {
         DateFormat df = new SimpleDateFormat(pattern);
         return getParam(name).map(date -> {
             try {
@@ -94,13 +101,16 @@ public class ParamService {
 
     /**
      * Lưu file upload vào thư mục
-     * @param file chứa file upload từ client
+     *
+     * @param file       chứa file upload từ client
      * @param folderPath đường dẫn tính từ webroot
      * @return đối tượng chứa file đã lưu hoặc null nếu không có file upload
      * @throws RuntimeException lỗi lưu file
      */
     public File save(MultipartFile file, String folderPath) throws IOException {
-        Path path = Paths.get(context.getRealPath(folderPath + file.getName()));
+        String fileName = file.getOriginalFilename();
+        Path path = Paths.get(context.getRealPath(folderPath), fileName);
+        if (Files.notExists(path.getParent())) Files.createDirectories(path.getParent());
         file.transferTo(path);
         return path.toFile();
     }
