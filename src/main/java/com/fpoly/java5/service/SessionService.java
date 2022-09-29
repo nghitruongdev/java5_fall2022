@@ -24,7 +24,7 @@ public class SessionService {
      * @param name tên attribute
      * @param value giá trị attribute
      */
-    public void set(String name, Object value) {
+    public void add(String name, Object value) {
         session.setAttribute(name, value);
     }
 

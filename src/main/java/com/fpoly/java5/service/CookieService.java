@@ -39,7 +39,7 @@ public class CookieService {
      */
     public String getValue(String name) {
         Cookie c = get(name);
-        return c != null ? c.getValue() : "";
+        return c != null ? c.getValue() : null;
     }
 
     /**
@@ -65,6 +65,6 @@ public class CookieService {
      * @param name tên cookie cần xóa
      */
     public void remove(String name) {
-         add(name, null, 0);
+        add(name, null, 0);
     }
 }
