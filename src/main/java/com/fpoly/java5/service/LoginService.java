@@ -56,5 +56,4 @@ public class LoginService {
         cookieService.remove("username");
         cookieService.remove("password");
     }
-
 }
