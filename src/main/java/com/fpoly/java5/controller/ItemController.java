@@ -15,10 +15,10 @@ public class ItemController {
 
     @Autowired
     SessionService sessionService;
-    @RequestMapping("/items/index")
-    public String showItems(){
-        sessionService.add("items", Item.ITEM_DB.values());
-        return "item_index";
-    }
+//    @RequestMapping()
+//    public String showItems(){
+//        sessionService.add("items", Item.ITEM_DB.values());
+//        return "index";
+//    }
 
 }

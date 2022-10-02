@@ -44,6 +44,7 @@ public class LoginService {
 
     private void saveLoginInfo(User user, boolean remember) {
         if (remember) {
+            System.out.println(remember);
             int hoursRemember = 10 * 24;
             cookieService.add("username", user.getUsername(), hoursRemember);
             cookieService.add("password", user.getPassword(), hoursRemember);

@@ -2,6 +2,7 @@ package com.fpoly.java5.service;
 
 import com.fpoly.java5.entity.Item;
 
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -16,20 +17,28 @@ public class ShoppingCartService implements IShoppingCartService {
     Map<Integer, Item> map = new HashMap<>();
     Map<Integer, Item> db = Item.ITEM_DB;
 
+    @SneakyThrows
     @Override
     public Item add(Integer id) {
         Item item = db.get(id);
-        return map.merge(id, item, (k, v) -> {
-            v.setQuantity(v.getQuantity() + 1);
-            return v;
-        });
+        Item cartItem = (Item) item.clone();
+        cartItem.setQuantity(1);
+        return map.containsKey(id) ?
+                update(id, map.get(id).getQuantity() + 1) :
+                map.put(id, cartItem);
     }
 
     @Override
     public Item update(Integer id, int qty) {
-        return map.computeIfPresent(id, (k, v) -> {
-            v.setQuantity(qty);
-            return v;
+        int stock = db.get(id).getQuantity();
+        if(qty <= 0)
+            throw new RuntimeException("Số lượng không hợp lệ!");
+        if (qty > stock)
+            throw new RuntimeException("Không đủ số lượng tồn kho!");
+
+        return map.computeIfPresent(id, (key, item) -> {
+            item.setQuantity(qty);
+            return item;
         });
     }
 
@@ -51,7 +60,10 @@ public class ShoppingCartService implements IShoppingCartService {
 
     @Override
     public int getCount() {
-        return map.size();
+        return map.entrySet()
+                .stream()
+                .map(item -> item.getValue().getQuantity())
+                .reduce(Integer::sum).orElse(0);
     }
 
     @Override
