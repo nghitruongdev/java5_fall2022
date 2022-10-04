@@ -1,11 +1,14 @@
 #Config datasource MySQL
 # spring.datasource.url=jdbc:mysql://localhost:3306/shop_java5
 # spring.datasource.username=spring_user
-# spring.datasource.password=password
+# spring.datasource.password=
 # spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
 # spring.jpa.hibernate.ddl-auto=none
 # spring.jpa.show-sql=true
 # spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+uninstall plugin validate_password;
+
+# UNINSTALL COMPONENT 'file://component_validate_password';
 
 DROP DATABASE IF EXISTS `shop_java5`;
 
@@ -13,7 +16,7 @@ CREATE DATABASE IF NOT EXISTS `shop_java5`;
 
 DROP USER IF EXISTS 'spring_user'@'%';
 
-CREATE USER 'spring_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+CREATE USER 'spring_user'@'%' IDENTIFIED BY 'password';
 
 GRANT ALL ON `shop_java5`.* TO 'spring_user'@'%';
 
