@@ -1,7 +1,7 @@
 #Config datasource MySQL
 # spring.datasource.url=jdbc:mysql://localhost:3306/shop_java5
 # spring.datasource.username=spring_user
-# spring.datasource.password=
+# spring.datasource.password=password
 # spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
 # spring.jpa.hibernate.ddl-auto=none
 # spring.jpa.show-sql=true
