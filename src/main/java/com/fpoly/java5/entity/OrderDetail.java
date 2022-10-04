@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
@@ -26,17 +25,17 @@ public class OrderDetail implements Serializable {
     @Column(name = "quantity", nullable = true)
     private Integer quantity;
     @Basic
-    @Column(name = "orderid", nullable = true)
+    @Column(name = "orderid", nullable = true, insertable = false, updatable = false)
     private Integer orderid;
     @Basic
-    @Column(name = "productid", nullable = true)
+    @Column(name = "productid", nullable = true, insertable = false, updatable = false)
     private Integer productid;
     @ManyToOne
     @JoinColumn(name = "orderid", referencedColumnName = "id")
-    private Order ordersByOrderid;
+    private Order orderByOrderid;
     @ManyToOne
     @JoinColumn(name = "productid", referencedColumnName = "id")
-    private Product productsByProductid;
+    private Product productByProductid;
 
     @Override
     public boolean equals(Object o) {

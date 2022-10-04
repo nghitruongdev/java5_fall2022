@@ -10,7 +10,6 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
@@ -36,9 +35,9 @@ public class Product implements Serializable {
     @Column(name = "price", nullable = true, precision = 0)
     private Double price;
     @Basic
-    @Column(name = "categoryid", nullable = true, length = 50)
+    @Column(name = "categoryid", nullable = true, length = 50, insertable = false, updatable = false)
     private String categoryid;
-    @OneToMany(mappedBy = "productsByProductid")
+    @OneToMany(mappedBy = "productByProductid")
     private Collection<OrderDetail> orderDetailsById;
     @ManyToOne
     @JoinColumn(name = "categoryid", referencedColumnName = "id")

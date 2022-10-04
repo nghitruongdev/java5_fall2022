@@ -10,7 +10,6 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
@@ -38,7 +37,7 @@ public class Account implements Serializable {
     @Basic
     @Column(name = "photo", nullable = true, length = 50)
     private String photo;
-    @OneToMany(mappedBy = "accountsByUsername")
+    @OneToMany(mappedBy = "accountByUsername")
     @ToString.Exclude
     private Collection<Order> ordersByUsername;
 
@@ -71,5 +70,4 @@ public class Account implements Serializable {
         result = 31 * result + (photo != null ? photo.hashCode() : 0);
         return result;
     }
-
 }

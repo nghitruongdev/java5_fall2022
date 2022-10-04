@@ -2,6 +2,10 @@ DROP DATABASE IF EXISTS `J5Shop`;
 
 CREATE DATABASE IF NOT EXISTS `J5Shop`;
 
+DROP USER IF EXISTS 'springuser'@'%';
+
+create user 'springuser'@'%' IDENTIFIED WITH mysql_native_password by 'password'; -- Creates the user
+grant all on `J5Shop`.* to 'springuser'@'%'; -- Gives all privileges to the new user on the newly created database
 USE `J5Shop`;
 
 /* SQLINES DEMO *** le [dbo].[accounts]    Script Date: 5/31/2022 9:25:30 AM ******/

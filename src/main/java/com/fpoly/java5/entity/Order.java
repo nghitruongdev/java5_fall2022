@@ -10,7 +10,6 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
@@ -27,13 +26,13 @@ public class Order implements Serializable {
     @Column(name = "createdate", nullable = true)
     private Date createdate;
     @Basic
-    @Column(name = "username", nullable = true, length = 50)
+    @Column(name = "username", nullable = true, length = 50, insertable = false, updatable = false)
     private String username;
-    @OneToMany(mappedBy = "ordersByOrderid")
+    @OneToMany(mappedBy = "orderByOrderid")
     private Collection<OrderDetail> orderDetailsById;
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
-    private Account accountsByUsername;
+    private Account accountByUsername;
 
     @Override
     public boolean equals(Object o) {
