@@ -6,8 +6,9 @@
 # spring.jpa.hibernate.ddl-auto=none
 # spring.jpa.show-sql=true
 # spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-uninstall plugin validate_password;
 
+# Run the script by root account
+uninstall plugin validate_password;
 # UNINSTALL COMPONENT 'file://component_validate_password';
 
 DROP DATABASE IF EXISTS `shop_java5`;
@@ -50,22 +51,22 @@ ALTER TABLE `products`
 
 CREATE TABLE `users`
 (
-    id         int AUTO_INCREMENT PRIMARY KEY ,
-    username   nvarchar(50)       NOT NULL,
-    `password` nvarchar(50)       NULL,
-    full_name  nvarchar(50)       NULL,
-    email      nvarchar(50)       NULL,
-    phone      nchar(10)          NULL,
-    `role`     int                NULL
+    id         INT AUTO_INCREMENT PRIMARY KEY ,
+    username   NVARCHAR(50)       NOT NULL,
+    `password` NVARCHAR(50)       NULL,
+    full_name  NVARCHAR(50)       NULL,
+    email      NVARCHAR(50)       NULL,
+    phone      NCHAR(10)          NULL,
+    `role`     INT                NULL
 );
 
 CREATE TABLE `orders`
 (
-    id      int AUTO_INCREMENT PRIMARY KEY ,
-    user_id int,
-    total   decimal(12, 3)     NOT NULL,
-    phone   varchar(11)        NOT NULL,
-    address nvarchar(255)      NOT NULL
+    id      INT AUTO_INCREMENT PRIMARY KEY ,
+    user_id INT,
+    total   DECIMAL(12, 3)     NOT NULL,
+    phone   VARCHAR(11)        NOT NULL,
+    address NVARCHAR(255)      NOT NULL
 );
 
 ALTER TABLE `orders`
@@ -75,11 +76,11 @@ ALTER TABLE `orders`
 
 CREATE TABLE `order_details`
 (
-    id         int AUTO_INCREMENT PRIMARY KEY,
-    order_id   int,
-    product_id nvarchar(50),
-    quantity   int                NOT NULL,
-    price      decimal(12, 3)     NOT NULL
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    order_id   INT,
+    product_id NVARCHAR(50),
+    quantity   INT                NOT NULL,
+    price      DECIMAL(12, 3)     NOT NULL
 );
 
 ALTER TABLE `order_details`
