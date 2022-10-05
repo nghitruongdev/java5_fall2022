@@ -29,7 +29,7 @@ public class ProductController {
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList",categoryList);
 
-        return "detail";
+        return "detailProduct";
     }
 
     // localhost:8080/product?productID=???
