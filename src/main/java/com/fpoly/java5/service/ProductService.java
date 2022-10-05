@@ -23,6 +23,6 @@ public class ProductService {
     }
 
     public Product findByProductId(String id) {
-        return repo.findByProductId(id);
+        return repo.findProductById(id);
     }
 }

@@ -18,6 +18,6 @@ public class CategoryService {
     }
 
     public Category findByCateId(String id) {
-        return repo.findByCategoryId(id);
+        return repo.findCategoryById(id);
     }
 }
