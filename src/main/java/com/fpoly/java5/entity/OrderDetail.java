@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "order_details", schema = "J5Shop", catalog = "")
+@Table(name = "order_details")
 public class OrderDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,10 +32,10 @@ public class OrderDetail implements Serializable {
     private Integer productid;
     @ManyToOne
     @JoinColumn(name = "orderid", referencedColumnName = "id")
-    private Order orderByOrderid;
+    private Order order;
     @ManyToOne
     @JoinColumn(name = "productid", referencedColumnName = "id")
-    private Product productByProductid;
+    private Product product;
 
     @Override
     public boolean equals(Object o) {

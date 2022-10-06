@@ -13,7 +13,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "orders", schema = "J5Shop", catalog = "")
+@Table(name = "orders")
 public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -28,11 +28,11 @@ public class Order implements Serializable {
     @Basic
     @Column(name = "username", nullable = true, length = 50, insertable = false, updatable = false)
     private String username;
-    @OneToMany(mappedBy = "orderByOrderid")
+    @OneToMany(mappedBy = "order")
     private Collection<OrderDetail> orderDetailsById;
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
-    private Account accountByUsername;
+    private Account account;
 
     @Override
     public boolean equals(Object o) {

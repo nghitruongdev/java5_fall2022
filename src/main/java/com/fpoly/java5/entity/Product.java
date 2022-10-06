@@ -13,7 +13,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "products", schema = "J5Shop", catalog = "")
+@Table(name = "products")
 public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,11 +37,11 @@ public class Product implements Serializable {
     @Basic
     @Column(name = "categoryid", nullable = true, length = 50, insertable = false, updatable = false)
     private String categoryid;
-    @OneToMany(mappedBy = "productByProductid")
-    private Collection<OrderDetail> orderDetailsById;
+    @OneToMany(mappedBy = "product")
+    private Collection<OrderDetail> orderDetails;
     @ManyToOne
     @JoinColumn(name = "categoryid", referencedColumnName = "id")
-    private Category categoriesByCategoryid;
+    private Category category;
 
     @Override
     public boolean equals(Object o) {

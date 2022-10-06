@@ -12,7 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "categories", schema = "J5Shop", catalog = "")
+@Table(name = "categories")
 public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,9 +21,9 @@ public class Category implements Serializable {
     @Basic
     @Column(name = "name", nullable = true, length = 50)
     private String name;
-    @OneToMany(mappedBy = "categoriesByCategoryid")
+    @OneToMany(mappedBy = "category")
     @ToString.Exclude
-    private Collection<Product> productsById;
+    private Collection<Product> products;
 
 
     @Override

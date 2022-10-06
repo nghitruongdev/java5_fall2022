@@ -13,7 +13,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "accounts", schema = "J5Shop", catalog = "")
+@Table(name = "accounts")
 public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,9 +37,9 @@ public class Account implements Serializable {
     @Basic
     @Column(name = "photo", nullable = true, length = 50)
     private String photo;
-    @OneToMany(mappedBy = "accountByUsername")
+    @OneToMany(mappedBy = "account")
     @ToString.Exclude
-    private Collection<Order> ordersByUsername;
+    private Collection<Order> orders;
 
     @Override
     public boolean equals(Object o) {
