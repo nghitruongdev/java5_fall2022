@@ -3,10 +3,10 @@
 <table class="table">
     <thead>
     <tr>
-        <th scope="col"><a href="/product/index" class="">ID</a></th>
-        <th scope="col"><a href="/product/index">Name</a></th>
-        <th scope="col"><a href="/product/index">Price</a></th>
-        <th scope="col"><a href="/product/index">Date</a></th>
+        <th scope="col"><a href="/product/sort?field=id" class="">ID</a></th>
+        <th scope="col"><a href="/product/sort?field=name">Name</a></th>
+        <th scope="col"><a href="/product/sort?field=price">Price</a></th>
+        <th scope="col"><a href="/product/sort?field=createdate">Date</a></th>
     </tr>
     </thead>
     <tbody>
@@ -20,3 +20,16 @@
     </c:forEach>
     </tbody>
 </table>
+<div class="d-flex">
+    <a href="/product/page?p=0" class="">First</a>
+    <a href="/product/page?p=${page.number - 1}" class="">Previous</a>
+    <a href="/product/page?p=${page.number + 1}" class="">Next</a>
+    <a href="/product/page?p=${page.totalPages - 1}" class="">Last</a>
+</div>
+<ul>
+    <li class="">Số thực thể hiện tại: ${page.numberOfElements}</li>
+    <li class="">Trang số: ${page.number}</li>
+    <li class="">Kích thước trang: ${page.size}</li>
+    <li class="">Tổng số thực thể: ${page.totalElements}</li>
+    <li class="">Tổng số trang: ${page.totalPages}</li>
+</ul>

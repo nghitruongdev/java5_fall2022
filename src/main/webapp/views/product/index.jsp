@@ -9,10 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>SORTING BY PRICE</title>
+    <title>SORTING BY ${field}</title>
 </head>
 <body>
 <h3>SORTING PRODUCTS</h3>
 <c:import url="_table.jsp" />
+${pageNumber}
 </body>
 </html>
