@@ -2,6 +2,7 @@ package com.fpoly.java5.controller;
 
 import com.fpoly.java5.entity.Product;
 import com.fpoly.java5.repo.ProductRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,8 @@ public class ProductController {
     @Autowired
     ProductRepository repo;
 
+    @Autowired
+    HttpSession session;
     @RequestMapping("/index")
     public String index(Model model) {
         model.addAttribute("items", repo.findAll());
@@ -58,5 +62,21 @@ public class ProductController {
         return "product/index";
     }
 
+    @RequestMapping("/search")
+    public String search(Model model,
+                         @RequestParam("min") Optional<Double> min,
+                         @RequestParam("max") Optional<Double> max) {
+        double minValue = min.orElse(Double.MIN_VALUE);
+        double maxValue = max.orElse(Double.MAX_VALUE);
+        List<Product> items = repo.findByPrice(minValue, maxValue);
+        model.addAttribute("items", items);
+        return "product/index";
+    }
 
+    @RequestMapping("/search-and-page")
+    public String searchAndPage(Model model,
+                                @RequestParam("keywords") Optional<String> keyword,
+                                @RequestParam("page") Optional<Integer> page) {
+        return "";
+    }
 }

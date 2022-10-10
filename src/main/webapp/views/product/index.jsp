@@ -9,11 +9,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>SORTING BY ${field}</title>
+    <c:import url="../common-link.jsp"/>
+    <title>LAB 6 - SEARCHING</title>
 </head>
 <body>
-<h3>SORTING PRODUCTS</h3>
-<c:import url="_table.jsp" />
+<h3>SEARCH BY PRICE</h3>
+<div class="">
+    <form action="/product/search" class="row">
+        <div class="col-10">
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="price-min" class="form-label">Min Price</label>
+                    <input type="text" class="form-control" id="price-min" placeholder="Min price?">
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="price-max" class="form-label">Max Price</label>
+                    <input type="text" class="form-control" id="price-max" placeholder="Max price?">
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 col-2 align-items-center d-flex">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+
+<c:import url="_table.jsp"/>
 ${pageNumber}
 </body>
 </html>
