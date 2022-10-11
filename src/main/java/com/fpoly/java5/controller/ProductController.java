@@ -2,9 +2,11 @@ package com.fpoly.java5.controller;
 
 import com.fpoly.java5.entity.Product;
 import com.fpoly.java5.repo.ProductRepository;
+import com.fpoly.java5.service.SessionService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,8 @@ public class ProductController {
     ProductRepository repo;
 
     @Autowired
-    HttpSession session;
+    SessionService session;
+
     @RequestMapping("/index")
     public String index(Model model) {
         model.addAttribute("items", repo.findAll());
@@ -45,20 +48,12 @@ public class ProductController {
     public String page(Model model,
                        @RequestParam("p") Optional<Integer> page) {
         int pageSize = 5;
-        Long totalCount = repo.count();
-        int totalPage = (int) (totalCount / pageSize) +
-                (totalCount % pageSize == 0 ? 0 : 1);
-        int lastPage = totalPage - 1;
-        int pageNumber = page.orElse(0);
-        pageNumber = pageNumber < 0 ?
-                0 :
-                pageNumber <= lastPage ? pageNumber : lastPage;
+        int pageNumber = checkPageNumber(page.orElse(0), pageSize);
 
         Pageable pageable = Pageable.ofSize(pageSize).withPage(pageNumber);
         Page<Product> products = repo.findAll(pageable);
         model.addAttribute("items", products.getContent());
         model.addAttribute("page", products);
-        model.addAttribute("pageNumber", totalPage);
         return "product/index";
     }
 
@@ -68,15 +63,36 @@ public class ProductController {
                          @RequestParam("max") Optional<Double> max) {
         double minValue = min.orElse(Double.MIN_VALUE);
         double maxValue = max.orElse(Double.MAX_VALUE);
-        List<Product> items = repo.findByPrice(minValue, maxValue);
+//        List<Product> items = repo.findByPrice(minValue, maxValue);
+        List<Product> items = repo.findByPriceBetween(minValue, maxValue);
         model.addAttribute("items", items);
+        model.addAttribute("min", minValue);
+        model.addAttribute("max", maxValue);
         return "product/index";
     }
 
     @RequestMapping("/search-and-page")
     public String searchAndPage(Model model,
-                                @RequestParam("keywords") Optional<String> keyword,
+                                @RequestParam("keyword") Optional<String> keyword,
                                 @RequestParam("page") Optional<Integer> page) {
-        return "";
+        String keywordValue = keyword.orElse(session.getOrDefault("keyword", ""));
+        session.add("keyword", keywordValue);
+        int pageSize = 5;
+        int pageNumber = checkPageNumber(page.orElse(0), pageSize);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> pages = repo.findByKeyword('%' + keywordValue + '%', pageable);
+        model.addAttribute("items", pages.getContent());
+        model.addAttribute("page", pages);
+        return "/product/index";
+    }
+
+    private int checkPageNumber(int pageNumber, int pageSize) {
+        Long totalCount = repo.count();
+        int totalPage = (int) (totalCount / pageSize) +
+                (totalCount % pageSize == 0 ? 0 : 1);
+        int lastPage = totalPage - 1;
+        return pageNumber < 0 ?
+                0 :
+                pageNumber <= lastPage ? pageNumber : lastPage;
     }
 }
