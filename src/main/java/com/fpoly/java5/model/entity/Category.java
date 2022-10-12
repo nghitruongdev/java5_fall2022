@@ -20,8 +20,6 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "category")
     @ToString.Exclude
     private Collection<Product> products;
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

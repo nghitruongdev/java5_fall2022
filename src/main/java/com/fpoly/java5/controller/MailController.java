@@ -14,7 +14,7 @@ public class MailController {
 
 
     @SneakyThrows
-    @RequestMapping
+    @RequestMapping("/mail")
     @ResponseBody
     public String home() {
         mailService.queue("nghitvps19009@fpt.edu.vn", "Hello Nghi", "I come from Java Application!");
