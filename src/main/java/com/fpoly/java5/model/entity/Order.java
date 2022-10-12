@@ -1,4 +1,4 @@
-package com.fpoly.java5.entity;
+package com.fpoly.java5.model.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -17,15 +17,9 @@ import java.util.Collection;
 public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "address", nullable = true, length = 50)
     private String address;
-    @Basic
-    @Column(name = "createdate", nullable = true)
     private Date createdate;
-    @Basic
     @Column(name = "username", nullable = true, length = 50, insertable = false, updatable = false)
     private String username;
     @OneToMany(mappedBy = "order")

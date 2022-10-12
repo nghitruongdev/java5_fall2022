@@ -12,6 +12,8 @@
 	<lib name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:9.0.65" scope="PROVIDED"/>
 	<lib name="Maven: org.apache.tomcat.embed:tomcat-embed-jasper:9.0.65" scope="PROVIDED"/>
 	<lib name="Maven: org.eclipse.jdt:ecj:3.18.0" scope="PROVIDED"/>
+	<lib name="Maven: mysql:mysql-connector-java:8.0.30" scope="RUNTIME"/>
+	<lib name="Maven: com.microsoft.sqlserver:mssql-jdbc:10.2.1.jre8" scope="RUNTIME"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-starter-test:2.7.4" scope="TEST"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-test:2.7.4" scope="TEST"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.7.4" scope="TEST"/>
@@ -19,8 +21,6 @@
 	<lib name="Maven: net.minidev:json-smart:2.4.8" scope="TEST"/>
 	<lib name="Maven: net.minidev:accessors-smart:2.4.8" scope="TEST"/>
 	<lib name="Maven: org.ow2.asm:asm:9.1" scope="TEST"/>
-	<lib name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" scope="TEST"/>
-	<lib name="Maven: jakarta.activation:jakarta.activation-api:1.2.2" scope="TEST"/>
 	<lib name="Maven: org.assertj:assertj-core:3.22.0" scope="TEST"/>
 	<lib name="Maven: org.hamcrest:hamcrest:2.2" scope="TEST"/>
 	<lib name="Maven: org.junit.jupiter:junit-jupiter:5.8.2" scope="TEST"/>
@@ -32,7 +32,6 @@
 	<lib name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.2" scope="TEST"/>
 	<lib name="Maven: org.junit.platform:junit-platform-engine:1.8.2" scope="TEST"/>
 	<lib name="Maven: org.mockito:mockito-core:4.5.1" scope="TEST"/>
-	<lib name="Maven: net.bytebuddy:byte-buddy:1.12.17" scope="TEST"/>
 	<lib name="Maven: net.bytebuddy:byte-buddy-agent:1.12.17" scope="TEST"/>
 	<lib name="Maven: org.objenesis:objenesis:3.2" scope="TEST"/>
 	<lib name="Maven: org.mockito:mockito-junit-jupiter:4.5.1" scope="TEST"/>
@@ -75,10 +74,36 @@
 		<level name="Maven: org.apache.tomcat.embed:tomcat-embed-jasper:9.0.65" value="project"/>
 		<level name="Maven: org.eclipse.jdt:ecj:3.18.0" value="project"/>
 		<level name="Maven: javax.servlet:jstl:1.2" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:2.7.4" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-starter-aop:2.7.4" value="project"/>
+		<level name="Maven: org.aspectj:aspectjweaver:1.9.7" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.7.4" value="project"/>
+		<level name="Maven: com.zaxxer:HikariCP:4.0.3" value="project"/>
+		<level name="Maven: org.springframework:spring-jdbc:5.3.23" value="project"/>
+		<level name="Maven: jakarta.transaction:jakarta.transaction-api:1.3.3" value="project"/>
+		<level name="Maven: jakarta.persistence:jakarta.persistence-api:2.2.3" value="project"/>
+		<level name="Maven: org.hibernate:hibernate-core:5.6.11.Final" value="project"/>
+		<level name="Maven: org.jboss.logging:jboss-logging:3.4.3.Final" value="project"/>
+		<level name="Maven: net.bytebuddy:byte-buddy:1.12.17" value="project"/>
+		<level name="Maven: antlr:antlr:2.7.7" value="project"/>
+		<level name="Maven: org.jboss:jandex:2.4.2.Final" value="project"/>
+		<level name="Maven: com.fasterxml:classmate:1.5.1" value="project"/>
+		<level name="Maven: org.hibernate.common:hibernate-commons-annotations:5.1.2.Final" value="project"/>
+		<level name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.6" value="project"/>
+		<level name="Maven: org.glassfish.jaxb:txw2:2.3.6" value="project"/>
+		<level name="Maven: com.sun.istack:istack-commons-runtime:3.0.12" value="project"/>
+		<level name="Maven: org.springframework.data:spring-data-jpa:2.7.3" value="project"/>
+		<level name="Maven: org.springframework.data:spring-data-commons:2.7.3" value="project"/>
+		<level name="Maven: org.springframework:spring-orm:5.3.23" value="project"/>
+		<level name="Maven: org.springframework:spring-tx:5.3.23" value="project"/>
+		<level name="Maven: org.slf4j:slf4j-api:1.7.36" value="project"/>
+		<level name="Maven: org.springframework:spring-aspects:5.3.23" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-mail:2.7.4" value="project"/>
 		<level name="Maven: org.springframework:spring-context-support:5.3.23" value="project"/>
 		<level name="Maven: com.sun.mail:jakarta.mail:1.6.7" value="project"/>
 		<level name="Maven: com.sun.activation:jakarta.activation:1.2.2" value="project"/>
+		<level name="Maven: mysql:mysql-connector-java:8.0.30" value="project"/>
+		<level name="Maven: com.microsoft.sqlserver:mssql-jdbc:10.2.1.jre8" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-test:2.7.4" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-test:2.7.4" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.7.4" value="project"/>
@@ -86,7 +111,6 @@
 		<level name="Maven: net.minidev:json-smart:2.4.8" value="project"/>
 		<level name="Maven: net.minidev:accessors-smart:2.4.8" value="project"/>
 		<level name="Maven: org.ow2.asm:asm:9.1" value="project"/>
-		<level name="Maven: org.slf4j:slf4j-api:1.7.36" value="project"/>
 		<level name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" value="project"/>
 		<level name="Maven: jakarta.activation:jakarta.activation-api:1.2.2" value="project"/>
 		<level name="Maven: org.assertj:assertj-core:3.22.0" value="project"/>
@@ -100,7 +124,6 @@
 		<level name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.2" value="project"/>
 		<level name="Maven: org.junit.platform:junit-platform-engine:1.8.2" value="project"/>
 		<level name="Maven: org.mockito:mockito-core:4.5.1" value="project"/>
-		<level name="Maven: net.bytebuddy:byte-buddy:1.12.17" value="project"/>
 		<level name="Maven: net.bytebuddy:byte-buddy-agent:1.12.17" value="project"/>
 		<level name="Maven: org.objenesis:objenesis:3.2" value="project"/>
 		<level name="Maven: org.mockito:mockito-junit-jupiter:4.5.1" value="project"/>

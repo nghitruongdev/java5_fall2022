@@ -1,4 +1,4 @@
-package com.fpoly.java5.entity;
+package com.fpoly.java5.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

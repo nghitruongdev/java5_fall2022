@@ -1,4 +1,4 @@
-package com.fpoly.java5.entity;
+package com.fpoly.java5.model.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -16,18 +16,11 @@ import java.io.Serializable;
 public class OrderDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "price", nullable = true, precision = 0)
     private Double price;
-    @Basic
-    @Column(name = "quantity", nullable = true)
     private Integer quantity;
-    @Basic
     @Column(name = "orderid", nullable = true, insertable = false, updatable = false)
     private Integer orderid;
-    @Basic
     @Column(name = "productid", nullable = true, insertable = false, updatable = false)
     private Integer productid;
     @ManyToOne

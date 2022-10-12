@@ -1,7 +1,7 @@
 package com.fpoly.java5.repo;
 
-import com.fpoly.java5.entity.Product;
-import com.fpoly.java5.entity.Report;
+import com.fpoly.java5.model.entity.Product;
+import com.fpoly.java5.model.entity.Report;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

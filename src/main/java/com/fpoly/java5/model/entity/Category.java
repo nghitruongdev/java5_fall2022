@@ -1,4 +1,4 @@
-package com.fpoly.java5.entity;
+package com.fpoly.java5.model.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -15,10 +15,7 @@ import java.util.Collection;
 @Table(name = "categories")
 public class Category implements Serializable {
     @Id
-    @Column(name = "id", nullable = false, length = 50)
     private String id;
-    @Basic
-    @Column(name = "name", nullable = true, length = 50)
     private String name;
     @OneToMany(mappedBy = "category")
     @ToString.Exclude
