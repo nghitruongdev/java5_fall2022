@@ -21,16 +21,6 @@ public class LoginService {
     @Autowired
     CookieService cookieService;
 
-    // Database
-    // input username & password
-    // compare to database
-    // == database
-    // return user
-    // userpage
-//    public User getLogin(String username, String password) {
-//
-//        return user;
-//    }
 
     public boolean login() {
         String username = paramService.getString("username", "");
