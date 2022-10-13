@@ -1,6 +1,7 @@
 package com.fpoly.java5.service.Imp;
 
 import com.fpoly.java5.entity.MailInfo;
+import com.fpoly.java5.service.IMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

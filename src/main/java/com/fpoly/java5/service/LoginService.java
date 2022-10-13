@@ -5,8 +5,6 @@ import com.fpoly.java5.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 public class LoginService {
 
@@ -36,23 +34,27 @@ public class LoginService {
         return false;
     }
 
-    public User getSaveUser(){
+    public User getSaveUser() {
         String username = cookieService.getValue("username");
         String password = cookieService.getValue("password");
         User user = null;
         user.setUsername(username);
         user.setPassword(password);
-        return username == null ? null : user ;
+        return username == null ? null : user;
     }
 
 
     public void logout() {
         sessionService.remove("user");
     }
-    private boolean checkLoginInfo(User user){
-        return "fpoly".equalsIgnoreCase(user.getUsername()) && "123".equals(user.getPassword());
+
+    private boolean checkLoginInfo(User user) {
+        return repo.existsByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 
+    private boolean checkAdmin(User user) {
+        return user.isAdmin();
+    }
 
     private void saveLoginInfo(User user, boolean remember) {
         if (remember) {
@@ -69,4 +71,5 @@ public class LoginService {
         cookieService.remove("username");
         cookieService.remove("password");
     }
+
 }

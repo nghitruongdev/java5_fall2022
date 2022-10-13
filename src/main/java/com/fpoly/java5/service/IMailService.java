@@ -1,4 +1,4 @@
-package com.fpoly.java5.service.Imp;
+package com.fpoly.java5.service;
 
 import com.fpoly.java5.entity.MailInfo;
 
