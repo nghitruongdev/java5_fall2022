@@ -1,4 +1,4 @@
-package com.fpoly.java5.controller;
+package com.fpoly.java5.controller.user;
 
 
 import com.fpoly.java5.entity.Category;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/product")
-public class ProductController {
+public class CategoryController {
 
     @Autowired
     ProductService productService;

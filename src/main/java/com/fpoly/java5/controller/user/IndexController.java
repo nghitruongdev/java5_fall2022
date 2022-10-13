@@ -1,4 +1,4 @@
-package com.fpoly.java5.controller;
+package com.fpoly.java5.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

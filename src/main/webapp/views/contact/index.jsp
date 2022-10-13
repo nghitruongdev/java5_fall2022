@@ -21,6 +21,8 @@
 
 <c:import url="_map.jsp" />
 
+<c:import url="_contact-form.jsp" />
+
 <c:import url="_customers.jsp" />
 
 <c:import url="../layout/_footer.jsp" />

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="products">
   <div class="container">
     <div class="row">
@@ -15,7 +16,7 @@
         <div class="filters-content">
           <!-- add class: des | dev | gra | all-->
           <div class="row grid">
-            <div class="col-lg-4 col-md-4 all des dev gra">
+            <div class="col-lg-4 col-md-4 all">
               <c:import url="_product-card.jsp"/>
             </div>
           </div>

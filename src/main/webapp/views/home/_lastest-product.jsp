@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="latest-products">
     <div class="container">
         <div class="row">
@@ -8,7 +9,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <c:import url="product/_product-card.jsp"/>
+                <c:import url="../product/_product-card.jsp"/>
             </div>
         </div>
     </div>
