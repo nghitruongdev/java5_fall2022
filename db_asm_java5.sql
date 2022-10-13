@@ -44,11 +44,6 @@ CREATE TABLE `products`
     category_id NVARCHAR(50)
 );
 
-ALTER TABLE `products`
-    ADD CONSTRAINT fk_product_category FOREIGN KEY (category_id) REFERENCES `categories` (id)
-        ON UPDATE CASCADE ON DELETE NO ACTION
-;
-
 CREATE TABLE `users`
 (
     id         INT AUTO_INCREMENT PRIMARY KEY ,
@@ -69,11 +64,6 @@ CREATE TABLE `orders`
     address NVARCHAR(255)      NOT NULL
 );
 
-ALTER TABLE `orders`
-    ADD CONSTRAINT fk_users_orders FOREIGN KEY (user_id) REFERENCES `users` (id)
-        ON UPDATE CASCADE ON DELETE NO ACTION
-;
-
 CREATE TABLE `order_details`
 (
     id         INT AUTO_INCREMENT PRIMARY KEY,
@@ -82,6 +72,17 @@ CREATE TABLE `order_details`
     quantity   INT                NOT NULL,
     price      DECIMAL(12, 3)     NOT NULL
 );
+
+ALTER TABLE `products`
+    ADD CONSTRAINT fk_product_category FOREIGN KEY (category_id) REFERENCES `categories` (id)
+        ON UPDATE CASCADE ON DELETE NO ACTION
+;
+
+
+ALTER TABLE `orders`
+    ADD CONSTRAINT fk_users_orders FOREIGN KEY (user_id) REFERENCES `users` (id)
+        ON UPDATE CASCADE ON DELETE NO ACTION
+;
 
 ALTER TABLE `order_details`
     ADD CONSTRAINT fk_orders_order_details FOREIGN KEY (order_id) REFERENCES `orders` (id)
