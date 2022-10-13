@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,7 @@
 <body>
 
 <div class="w-75 mx-auto card px-5 py-4 mt-3" style="max-width: 500px;">
-    <form action="" class="row">
+    <form action="/mail" class="row" method="post" enctype="multipart/form-data">
         <div class="d-flex">
             <div class="mt-2">
                 <span class="btn btn-danger rounded mx-3"><i class="bi bi-envelope-open-fill text-white"></i></span>
@@ -32,23 +33,24 @@
         </div>
 
         <div class="mb-3 col-6">
-            <label for="" class="form-label">Your name <span class="required">*</span></label>
-            <input type="text" class="form-control" id="">
+            <label for="name" class="form-label">Your name <span class="required">*</span></label>
+            <input name="name" type="text" class="form-control" id="name">
         </div>
         <div class="mb-3 col-6">
-            <label for="" class="form-label">To <span class="required">*</span></label>
-            <input type="email" class="form-control" id="">
+            <label for="email" class="form-label">To <span class="required">*</span></label>
+            <input name="to" type="email" class="form-control" id="email">
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Subject <span class="required">*</span></label>
-            <input type="text" class="form-control" id="">
+            <label for="subject" class="form-label">Subject <span class="required">*</span></label>
+            <input name="subject" type="text" class="form-control" id="subject">
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Content</label>
-            <textarea class="form-control" aria-label="With textarea" style="min-height: 100px;"></textarea>
+            <label for="body" class="form-label">Content</label>
+            <textarea name="body" class="form-control" id="body" aria-label="With textarea"
+                      style="min-height: 100px;"></textarea>
         </div>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" id="inputGroupFile02">
+            <input name="attachments" type="file" class="form-control" id="inputGroupFile02" multiple="multiple">
             <label class="input-group-text" for="inputGroupFile02">Upload</label>
         </div>
         <div class="mt-2 text-end">
@@ -56,6 +58,7 @@
         </div>
     </form>
 </div>
+
 </body>
 
 </html>

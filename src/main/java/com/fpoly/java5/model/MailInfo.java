@@ -1,23 +1,28 @@
 package com.fpoly.java5.model;
 
 import com.fpoly.java5.util.PropertyUtil;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import java.io.File;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class MailInfo implements Comparable<MailInfo> {
     String from = PropertyUtil
             .get("application.properties")
             .getProperty("spring.mail.username", "nghitvps19009@fpt.edu.vn");
     String to, subject, body;
-    String[] cc, bcc, attachments;
+    String[] cc, bcc;
+    MultipartFile[] attachments;
+    Map<String, byte[]> map = new HashMap<>();
 
     public MailInfo(String to, String subject, String body) {
         this.to = to;
@@ -25,6 +30,7 @@ public class MailInfo implements Comparable<MailInfo> {
         this.body = body;
     }
 
+    @SneakyThrows
     public void prepareToSend(MimeMessageHelper helper) throws MessagingException {
         helper.setFrom(from);
         helper.setTo(to);
@@ -34,10 +40,19 @@ public class MailInfo implements Comparable<MailInfo> {
 
         if (cc != null && cc.length > 0) helper.setCc(cc);
         if (bcc != null && bcc.length > 0) helper.setBcc(bcc);
-        if (attachments != null && attachments.length > 0) {
-            for (String filePath : attachments) {
-                File file = new File(filePath);
-                helper.addAttachment(file.getName(), file);
+        map.forEach((name, array) -> addAttachment(name, array, helper));
+    }
+
+    @SneakyThrows
+    private void addAttachment(String name, byte[] array, MimeMessageHelper helper) {
+        helper.addAttachment(name, new ByteArrayResource(array));
+    }
+
+    @SneakyThrows
+    public void setAttachments(MultipartFile[] attachments) {
+        for (MultipartFile attach : attachments) {
+            if (!attach.isEmpty() && attach.getSize() > 0) {
+                map.put(attach.getOriginalFilename(), attach.getBytes());
             }
         }
     }
