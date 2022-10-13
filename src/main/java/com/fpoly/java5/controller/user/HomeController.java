@@ -8,7 +8,7 @@ public class HomeController {
 
     @RequestMapping
     public String index(){
-        return "product/index";
+        return "home/index";
     }
     @RequestMapping("/about")
     public String about() {

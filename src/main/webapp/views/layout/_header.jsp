@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="">
     <nav class="navbar navbar-expand">
         <div class="container">
@@ -9,7 +10,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav w-100">
+                <ul class="navbar-nav w-100 pr-5">
                     <li class="nav-item ${isAbout || isProduct || isContact? '': 'active'}">
                         <a class="nav-link" href="/">Home
                             <span class="sr-only">(current)</span>
@@ -30,17 +31,28 @@
                             <span id="cart-badge" class="badge badge-pill badge-danger text-white">1</span>
                         </a>
                     </li>
-                    <li class="nav-item mt-2 ml-2">
-                        <!-- <button class="btn btn-success">Sign in</button> -->
-                        <a href="#" class="nav-icon-link">
-                            <span class="fa fa-user nav-icon"></span>
-                        </a>
-                    </li>
-                    <!-- <li class="mt-2">
-                      <button class="btn btn-primary">Log in</button>
-                    </li> -->
+
+                    <c:if test="${user == null}">
+                        <c:import url="../auth/_login.jsp"/>
+                    </c:if>
+                    <c:if test="${user != nul}">
+                        <li class="nav-item dropdown text-left mt-2">
+                            <a class=" p-0 text-white" href="#" role="button" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="mdo" width="35" height="35"
+                                     class="rounded-circle img-fluid">
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/account/logout">Sign out</a>
+                            </div>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+<c:import url="../auth/_login-form.jsp" />
