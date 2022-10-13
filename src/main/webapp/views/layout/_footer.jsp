@@ -7,6 +7,7 @@
 
                         - Design: <a rel="nofollow noopener" href="https://templatemo.com"
                                      target="_blank">TemplateMo</a></p>
+                    <p>${uri}</p>
                 </div>
             </div>
         </div>

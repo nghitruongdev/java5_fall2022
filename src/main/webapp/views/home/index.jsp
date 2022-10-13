@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 <!-- ***** Preloader Start ***** -->
 <c:import url="../layout/_pre-loader.jsp" />
 

@@ -10,18 +10,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav w-100">
-                    <li class="nav-item active">
+                    <li class="nav-item ${isAbout || isProduct || isContact? '': 'active'}">
                         <a class="nav-link" href="/">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ${ isProduct ?'active': ''}">
                         <a class="nav-link" href="/products">Our Products</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ${ isAbout ?'active': ''}">
                         <a class="nav-link" href="/about">About Us</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ${ isContact ?'active': ''}">
                         <a class="nav-link" href="/contact">Contact Us</a>
                     </li>
                     <li class="nav-item ml-auto mt-2 position-relative">
