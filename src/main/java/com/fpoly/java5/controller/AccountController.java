@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/account")
 public class AccountController {
-    @Autowired
-    LoginService loginService;
-
-    @GetMapping("/login")
-    @ResponseBody
-    public User login1(Model model) {
-        User saveUser = loginService.getSaveUser();
-        model.addAttribute("user", saveUser);
-        return saveUser;
-    }
-
-    @PostMapping("/login")
-    public String login2(Model model) {
-        boolean result = loginService.login();
-        model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-        return "redirect:/";
-    }
-
-    @RequestMapping("/logout")
-    public String logout() {
-        loginService.logout();
-        return "redirect:/";
-    }
+//    @Autowired
+//    LoginService loginService;
+//
+//    @GetMapping("/login")
+//    @ResponseBody
+//    public User login1(Model model) {
+//        User saveUser = loginService.getSaveUser();
+//        model.addAttribute("user", saveUser);
+//        return saveUser;
+//    }
+//
+//    @PostMapping("/login")
+//    public String login2(Model model) {
+//        boolean result = loginService.login();
+//        model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
+//        return "redirect:/";
+//    }
+//
+//    @RequestMapping("/logout")
+//    public String logout() {
+//        loginService.logout();
+//        return "redirect:/";
+//    }
 
 
 }

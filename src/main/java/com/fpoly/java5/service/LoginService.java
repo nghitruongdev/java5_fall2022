@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     @Autowired
+    UserService userService;
+    @Autowired
     UserRepository repo;
     @Autowired
     SessionService sessionService;
@@ -24,7 +26,7 @@ public class LoginService {
         String username = paramService.getString("username", "");
         String password = paramService.getString("password", "");
         boolean remember = paramService.getBoolean("remember", false);
-        User user = repo.findByUsernameAndPassword(username, password);
+        User user = userService.userValidate(username, password);
         if (checkLoginInfo(user)) {
             saveLoginInfo(user, remember);
             sessionService.add("user", user);
@@ -32,6 +34,10 @@ public class LoginService {
         }
         removeLoginInfo();
         return false;
+    }
+
+    public void register() {
+
     }
 
     public User getSaveUser() {
