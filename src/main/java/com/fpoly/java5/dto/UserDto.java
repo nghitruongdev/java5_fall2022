@@ -30,5 +30,6 @@ public class UserDto {
     @NotNull
     @NotEmpty
     @ValidEmail
+
     String email;
 }

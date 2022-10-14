@@ -26,36 +26,47 @@ public class LoginService {
         String username = paramService.getString("username", "");
         String password = paramService.getString("password", "");
         boolean remember = paramService.getBoolean("remember", false);
-        User user = userService.userValidate(username, password);
-        if (checkLoginInfo(user)) {
-            saveLoginInfo(user, remember);
-            sessionService.add("user", user);
+        // Create local user to store client input
+        User localUser = new User();
+        // Local user will now store username and password from client
+        localUser.setUsername(username);
+        localUser.setPassword(password);
+        // Use database user to compare with client input
+        User userDb = repo.findByUsername(username);
+
+        // Check if client input is equal to database user or not
+        if (checkLoginInfo(userDb, localUser)) {
+            saveLoginInfo(userDb, remember);
+            sessionService.add("user", userDb);
             return true;
         }
         removeLoginInfo();
         return false;
     }
 
-    public void register() {
-
+    public boolean getAdmin() {
+        User user = sessionService.get("user");
+        return user.isAdmin();
     }
+//
+//    public User getSaveUser() {
+//        String username = cookieService.getValue("username");
+//        String password = cookieService.getValue("password");
+//        User user = null;
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        return username == null ? null : user;
+//    }
+//
 
-    public User getSaveUser() {
-        String username = cookieService.getValue("username");
-        String password = cookieService.getValue("password");
-        User user = null;
-        user.setUsername(username);
-        user.setPassword(password);
-        return username == null ? null : user;
-    }
 
 
     public void logout() {
         sessionService.remove("user");
     }
 
-    private boolean checkLoginInfo(User user) {
-        return repo.existsByUsernameAndPassword(user.getUsername(), user.getPassword());
+    private boolean checkLoginInfo(User userDb, User localUser) {
+        return userDb == localUser;
     }
 
     private boolean checkAdmin(User user) {

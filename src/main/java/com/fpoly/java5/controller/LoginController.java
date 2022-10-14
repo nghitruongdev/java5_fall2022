@@ -1,6 +1,5 @@
 package com.fpoly.java5.controller;
 
-import com.fpoly.java5.dto.UserDto;
 import com.fpoly.java5.entity.User;
 import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
@@ -8,13 +7,7 @@ import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -27,19 +20,29 @@ public class LoginController {
     UserService userService;
 
 
+
+
+    // Open login form
     @RequestMapping("/account/login")
     public String getLogin() {
         return "login_form";
     }
 
 
+    // Login form
+    // If user is admin redirect to admin page
+    // If user is normal user redirect to user page
     @PostMapping("/account/login") // Login
     public String doGetLogin(Model model) {
         boolean result = loginService.login();
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-        return "redirect:/";
+        return loginService.getAdmin() ?
+                "redirect:/admin" :
+                "redirect:/user";
+
     }
 
+    // Logout -> return to index
     @RequestMapping("/account/logout")
     public String logout() {
         loginService.logout();
@@ -71,15 +74,38 @@ public class LoginController {
 //    }
 
 
+    // Open register form
+    @GetMapping("/account/register")
+    public String getRegister() {
+        return "register";
+    }
+
+    // Action register form
+    @PostMapping("/account/register")
+    public String doGetRegister(@ModelAttribute User user, Model model) {
+        // Check if the data entered by the customer exists or not (If existed return to register page)
+        if (userService.isUserExist(user)) {
+            model.addAttribute("error", "User already existed");
+            return "redirect:/register";
+        }
+        // If not existed, save user -> return to login to continue login
+        else {
+            repo.save(user);
+            model.addAttribute("message", "Sign Up Success");
+            return "redirect:/account/login";
+        }
+    }
 
 
 
-    // Forgot password
+    // Forgot password open form
     @GetMapping("/account/forgotPassword")
     public String forgot() {
         return "forgot";
     }
 
+    // Forgot password, send new random number to client's email
+    // If client enters wrong email -> Cannot send
     @PostMapping("/account/forgotPassword")
     public String forgot(@RequestParam("username") String username,
                          Model model) {
