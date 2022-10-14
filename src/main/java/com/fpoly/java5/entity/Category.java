@@ -23,5 +23,4 @@ public class Category {
     @ToString.Exclude
     @OneToMany(mappedBy = "category")
     private List<Product> productsById;
-
 }

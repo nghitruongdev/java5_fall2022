@@ -20,7 +20,7 @@ public class Product {
     @Column(name = "name", nullable = true, length = 255)
     private String name;
     @Column(name = "price", nullable = true, precision = 3)
-    private BigDecimal price;
+    private double price;
     @Column(name = "description", nullable = true, length = -1)
     private String description;
     @Column(name = "img", nullable = true, length = 255)

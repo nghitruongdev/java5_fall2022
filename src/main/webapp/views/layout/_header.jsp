@@ -2,7 +2,7 @@
 <header class="">
     <nav class="navbar navbar-expand">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="${isHome? '#' : '/'}">
                 <h2>VN<em>CO</em></h2>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -11,19 +11,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav w-100 pr-5">
-                    <li class="nav-item ${isAbout || isProduct || isContact? '': 'active'}">
-                        <a class="nav-link" href="/">Home
+                    <li class="nav-item ${isHome? 'active': ''}">
+                        <a class="nav-link" href="${isHome? '#' : '/'}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu">
+                            <c:forEach items="${categories}" var="item" varStatus="status">
+                                <a href="#" class="dropdown-item small">${item.name}</a>
+                                <%--                                <c:if test="${!status.last}">--%>
+                                <%--                                    <div class="dropdown-divider"></div>--%>
+                                <%--                                </c:if>--%>
+                            </c:forEach>
+                        </div>
+                        </a>
+                    </li>
                     <li class="nav-item ${ isProduct ?'active': ''}">
-                        <a class="nav-link" href="/products">Our Products</a>
+                        <a class="nav-link" href="${isProduct? '#' : '/products'}">Our Products</a>
                     </li>
                     <li class="nav-item ${ isAbout ?'active': ''}">
-                        <a class="nav-link" href="/about">About Us</a>
+                        <a class="nav-link" href="${isAbout? '#' : '/about'}">About Us</a>
                     </li>
                     <li class="nav-item ${ isContact ?'active': ''}">
-                        <a class="nav-link" href="/contact">Contact Us</a>
+                        <a class="nav-link" href="${isContact? '#' : '/contact'}">Contact Us</a>
                     </li>
                     <li class="nav-item ml-auto mt-2 position-relative">
                         <a href="#" class="nav-icon-link">
@@ -55,4 +70,4 @@
         </div>
     </nav>
 </header>
-<c:import url="../auth/_login-form.jsp" />
+<c:import url="../auth/_login-form.jsp"/>

@@ -644,8 +644,11 @@ footer .inner-content p a {
 	cursor: pointer;
 }
 
-.products .filters ul li.active,
-.products .filters ul li:hover {
+.products .filters ul  li a{
+	color: black;
+}
+.products .filters ul  li a.active,
+.products .filters ul li a:hover {
   color: #f33f3f;
 }
 
@@ -1079,4 +1082,10 @@ footer .inner-content p a {
 	position: absolute;
 	right: -10px;
 	top: -3px;
+}
+
+.dropdown-item:hover {
+	font-weight: bold;
+	border-bottom: 2px red solid;
+	transition: border 300ms;
 }
