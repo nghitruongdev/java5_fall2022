@@ -24,8 +24,8 @@ public class CategoryController {
     // localhost:8080/product/{categoryID}
     @GetMapping("/{categoryID}")
     public String doGetProductbyCgrId(@PathVariable("categoryID") String categoryId, Model model) {
-        List<Product> productList = productService.findByCategoryId(categoryId);
-        model.addAttribute("productList", productList);
+//        List<Product> productList = productService.findByCategoryId(categoryId);
+//        model.addAttribute("productList", productList);
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList",categoryList);
 

@@ -24,7 +24,6 @@ public class DataInterceptor implements HandlerInterceptor {
         boolean isProduct = uri.startsWith("/products");
         boolean isContact = uri.startsWith("/contact");
         boolean isHome = !(isAbout || isProduct || isContact);
-
         request.setAttribute("uri", uri);
         request.setAttribute("isAbout", isAbout);
         request.setAttribute("isProduct", isProduct);
