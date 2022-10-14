@@ -19,19 +19,22 @@ public class MailController {
     @Autowired
     MailService mailService;
 
-
     @SneakyThrows
     @RequestMapping("/mail")
     public String openForm() {
-//        mailService.queue("nghitvps19009@fpt.edu.vn", "Hello Nghi", "I come from Java Application!");
         return "mail/mail_form";
     }
 
-    @PostMapping("/mail")
-    public String sendMail(MailInfo mail, Model model) throws MessagingException {
-        mailService.queue(mail);
-        model.addAttribute("mail", mail);
+    @PostMapping("/mail/send")
+    public String sendMail(MailInfo mail, Model model) {
+        mailService.send(mail);
         model.addAttribute("message", "Đã gửi email thành công!");
+        return "mail/mail_form";
+    }
+    @PostMapping("/mail/queue")
+    public String sendLater(MailInfo mail, Model model) {
+        mailService.queue(mail);
+        model.addAttribute("message", "Mail của bạn sẽ được gửi trong giây lát!");
         return "mail/mail_form";
     }
 }

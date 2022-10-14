@@ -11,7 +11,7 @@ public interface MailService {
      * @param mail thông tin email
      * @throws MessagingException lỗi gửi email
      */
-    void send(MailInfo mail) throws MessagingException;
+    void send(MailInfo mail);
 
     /**
      * Gửi email đơn giản
@@ -21,7 +21,7 @@ public interface MailService {
      * @param body    nội dung email
      * @throws MessagingException lỗi gửi email
      */
-    void send(String to, String subject, String body) throws MessagingException;
+    void send(String to, String subject, String body);
 
     /**
      * Xếp mail vào hàng đợi

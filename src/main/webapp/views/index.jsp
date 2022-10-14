@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Java5-Fall2022</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <c:import url="common-link.jsp" />
 </head>
 <body>

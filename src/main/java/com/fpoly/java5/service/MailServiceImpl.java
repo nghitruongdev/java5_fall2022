@@ -21,7 +21,7 @@ public class MailServiceImpl implements MailService {
     JavaMailSender sender;
 
     @Override
-    public void send(MailInfo mail) throws MessagingException {
+    public void send(MailInfo mail) {
         MimeMessagePreparator preparator = (mimeMessage) -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
             mail.prepareToSend(message);
@@ -31,7 +31,7 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void send(String to, String subject, String body) throws MessagingException {
+    public void send(String to, String subject, String body) {
         send(new MailInfo(to, subject, body));
     }
 

@@ -4,9 +4,11 @@
 <html>
 <head>
     <c:import url="../common-link.jsp"/>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Title</title>
 </head>
 <body>
+<c:import url="../header.jsp"/>
 <div class="container bg-light vh-100">
     <div class="row pt-3 pb-4">
         <div class=" col-lg-5 col-md-6 col-8 mx-auto">
