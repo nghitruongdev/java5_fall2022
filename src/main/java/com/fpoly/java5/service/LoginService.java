@@ -33,7 +33,6 @@ public class LoginService {
         localUser.setPassword(password);
         // Use database user to compare with client input
         User userDb = repo.findByUsername(username);
-
         // Check if client input is equal to database user or not
         if (checkLoginInfo(userDb, localUser)) {
             saveLoginInfo(userDb, remember);
@@ -66,7 +65,7 @@ public class LoginService {
     }
 
     private boolean checkLoginInfo(User userDb, User localUser) {
-        return userDb == localUser;
+        return localUser.equals(userDb);
     }
 
     private boolean checkAdmin(User user) {
