@@ -1,7 +1,6 @@
 package com.fpoly.java5.service;
 
-import com.fpoly.java5.entity.MailInfo;
-
+import com.fpoly.java5.model.MailInfo;
 import javax.mail.MessagingException;
 
 public interface MailService {

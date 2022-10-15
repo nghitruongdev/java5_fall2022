@@ -1,6 +1,6 @@
 package com.fpoly.java5.controller.user;
 
-import com.fpoly.java5.entity.Product;
+import com.fpoly.java5.model.entity.Product;
 import com.fpoly.java5.repo.ProductRepository;
 import com.fpoly.java5.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

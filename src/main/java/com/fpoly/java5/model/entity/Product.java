@@ -1,11 +1,10 @@
-package com.fpoly.java5.entity;
+package com.fpoly.java5.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 @Getter
 @Setter

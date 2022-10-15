@@ -1,6 +1,6 @@
 package com.fpoly.java5.service;
 
-import com.fpoly.java5.entity.Category;
+import com.fpoly.java5.model.entity.Category;
 import com.fpoly.java5.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
