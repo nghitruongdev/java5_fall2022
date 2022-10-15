@@ -10,6 +10,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, String> {
     Page<Product> findByCategoryId(String id, Pageable pageable);
 
-    Product findProductById(String id);
     Long countByCategoryId(String id);
 }

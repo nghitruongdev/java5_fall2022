@@ -49,24 +49,22 @@ public class CategoryController {
 
     private void addAttribute(Model model, Page page) {
         model.addAttribute("products", page.getContent());
-        model.addAttribute("pages", getPages(page));
         model.addAttribute("page", page);
+        addPages(model, page);
     }
 
-    private int[] getPages(Page page) {
-        int current = page.getNumber() + 1;
-        if (page.getTotalPages() > 3) {
-            if (page.isFirst())
-                return new int[]{current, current + 1, current + 2};
-            else if (page.isLast())
-                return new int[]{current - 2, current - 1, current};
-            else return new int[]{current - 1, current, current + 1};
-        }
-        int[] array = new int[page.getTotalPages()];
-        for (int i = 1; i <= page.getTotalPages(); i++) {
-            array[i] = i;
-        }
-        return array;
+    private void addPages(Model model, Page page) {
+        int current = page.getNumber();
+        int lastPage = page.getTotalPages() - 1;
+        int total = 5;
+
+        int begin = current - 2 >= 0 ? current - 2 : 0;
+        int end = begin + total - 1;
+        end = end > lastPage ? lastPage : end;
+        begin = end - total + 1;
+        model.addAttribute("begin", begin);
+        model.addAttribute("end", end);
+        model.addAttribute("pages", new int[page.getTotalPages()]);
     }
 
     private int getPageNumber(Optional<Integer> page, long totalElements) {

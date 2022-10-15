@@ -29,10 +29,7 @@ public class ProductService {
     }
 
     public Product findByProductId(String id) {
-        return repo.findProductById(id);
-
-
-
+        return repo.findById(id).orElse(null);
     }
 
     public Long count() {

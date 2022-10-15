@@ -3,14 +3,14 @@
     <c:if test="${(page.totalPages > 2) && !page.first}">
         <li><a href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
     </c:if>
-    <c:forEach items="${pages}" varStatus="status" var="idx">
-        <li class="${(idx - 1 == page.number)? 'active': ''}">
-            <c:if test="${idx - 1 == page.number}">
-                <a href="#"> ${idx}</a>
+    <c:forEach items="${pages}" begin="${begin}" end="${end}" varStatus="status">
+        <li class="${(status.index == page.number)? 'active': ''}">
+            <c:if test="${status.index == page.number}">
+                <a href="#"> ${status.index + 1}</a>
             </c:if>
-            <c:if test="${idx - 1 != page.number}">
-                <a href="?page=${idx}">
-                        ${idx}
+            <c:if test="${status.index != page.number}">
+                <a href="?page=${status.index + 1}">
+                        ${status.index + 1}
                 </a>
             </c:if>
         </li>
