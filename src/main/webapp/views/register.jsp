@@ -25,13 +25,18 @@
                                     <form action="/account/register" method="post">
 
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="fullname" class="form-control form-control-lg" name="fullname"/>
-                                            <label class="form-label" for="fullname">Your Name</label>
+                                            <input type="text" id="fullName" class="form-control form-control-lg" name="fullName"/>
+                                            <label class="form-label" for="fullName">Your Name</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="email" id="email" class="form-control form-control-lg" name="email" />
                                             <label class="form-label" for="email">Your Email</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="username" class="form-control form-control-lg" name="username"/>
+                                            <label class="form-label" for="username">Username</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
@@ -45,8 +50,8 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="number" id="number" class="form-control form-control-lg" name="number"/>
-                                            <label class="form-label" for="number">number</label>
+                                            <input type="number" id="phone" class="form-control form-control-lg" name="phone"/>
+                                            <label class="form-label" for="phone">phone</label>
                                         </div>
 
 
@@ -58,7 +63,7 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center">
-                                            <button type="button"
+                                            <button type="submit"
                                                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                         </div>
 

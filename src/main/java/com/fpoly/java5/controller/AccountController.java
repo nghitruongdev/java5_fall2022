@@ -3,11 +3,15 @@ package com.fpoly.java5.controller;
 import com.fpoly.java5.entity.User;
 import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
+import com.fpoly.java5.service.ParamService;
+import com.fpoly.java5.service.SessionService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @Controller
 public class AccountController {
@@ -18,7 +22,10 @@ public class AccountController {
     UserRepository repo;
     @Autowired
     UserService userService;
-
+    @Autowired
+    SessionService sessionService;
+    @Autowired
+    ParamService paramService;
 
 
 
@@ -35,8 +42,10 @@ public class AccountController {
     @PostMapping("/account/login") // Login
     public String doGetLogin(Model model) {
         boolean result = loginService.login();
+
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-        return loginService.getAdmin() ?
+
+        return loginService.getAdmin((paramService.getString("username",""))) ?
                 "redirect:/admin" :
                 "redirect:/user";
 
@@ -86,12 +95,13 @@ public class AccountController {
         // Check if the data entered by the customer exists or not (If existed return to register page)
         if (userService.isUserExist(user)) {
             model.addAttribute("error", "User already existed");
-            return "redirect:/register";
+            return "register";
         }
         // If not existed, save user -> return to login to continue login
         else {
             repo.save(user);
             model.addAttribute("message", "Sign Up Success");
+            sessionService.add("user", user);
             return "redirect:/account/login";
         }
     }
@@ -106,27 +116,27 @@ public class AccountController {
 
     // Forgot password, send new random number to client's email
     // If client enters wrong email -> Cannot send
-    @PostMapping("/account/forgotPassword")
-    public String forgot(@RequestParam("username") String username,
-                         Model model) {
-        try {
-            User user = repo.findByUsername(username);
-            String to = user.getEmail();
-            String email = to.substring(0, 2);
-            double randomDouble = Math.random();
-            randomDouble = randomDouble * 100000 + 1;
-            int randomInt = (int) randomDouble;
-
-            String subject = "Get your password";
-            String body = "Your password is: " + randomInt;
-            mail.send(to, subject, body); // Gui mail lay lai mat khau
-            user.setPassword(String.valueOf(randomInt));
-            repo.save(user);
-            model.addAttribute("message", "Password has been sent to email: " + email);
-        } catch (Exception e) {
-            model.addAttribute("message", "Invalid Username");
-        }
-        return "forgot";
-    }
+//    @PostMapping("/account/forgotPassword")
+//    public String forgot(@RequestParam("username") String username,
+//                         Model model) {
+//        try {
+//            User user = repo.findByUsername(username);
+//            String to = user.getEmail();
+//            String email = to.substring(0, 2);
+//            double randomDouble = Math.random();
+//            randomDouble = randomDouble * 100000 + 1;
+//            int randomInt = (int) randomDouble;
+//
+//            String subject = "Get your password";
+//            String body = "Your password is: " + randomInt;
+//            mail.send(to, subject, body); // Gui mail lay lai mat khau
+//            user.setPassword(String.valueOf(randomInt));
+//            repo.save(user);
+//            model.addAttribute("message", "Password has been sent to email: " + email);
+//        } catch (Exception e) {
+//            model.addAttribute("message", "Invalid Username");
+//        }
+//        return "forgot";
+//    }
 
 }
