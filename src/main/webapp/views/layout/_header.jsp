@@ -23,16 +23,13 @@
                         </a>
                         <div class="dropdown-menu">
                             <c:forEach items="${categories}" var="item" varStatus="status">
-                                <a href="#" class="dropdown-item small">${item.name}</a>
-                                <%--                                <c:if test="${!status.last}">--%>
-                                <%--                                    <div class="dropdown-divider"></div>--%>
-                                <%--                                </c:if>--%>
+                                <a href="/categories/${item.id}" class="dropdown-item small">${item.name}</a>
                             </c:forEach>
                         </div>
                         </a>
                     </li>
                     <li class="nav-item ${ isProduct ?'active': ''}">
-                        <a class="nav-link" href="${isProduct? '#' : '/products'}">Our Products</a>
+                        <a class="nav-link" href="${isProduct? '#' : '/categories/all'}">Our Products</a>
                     </li>
                     <li class="nav-item ${ isAbout ?'active': ''}">
                         <a class="nav-link" href="${isAbout? '#' : '/about'}">About Us</a>

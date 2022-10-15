@@ -6,13 +6,13 @@
                 <div class="filters">
                     <ul>
                         <li class="" data-filter="*">
-                            <a href="/products"
+                            <a href="/categories/all"
                                class="nav-link ${uri.substring(uri.lastIndexOf("/") + 1).startsWith("products")? 'active' : ''}">All
                                 Products</a>
                         </li>
                         <c:forEach items="${categories}" var="item" varStatus="status">
                             <li class="">
-                                <a href="/products/${item.id}"
+                                <a href="/categories/${item.id}"
                                    class="nav-link ${uri.substring(uri.lastIndexOf("/") + 1).startsWith(item.id)? 'active' : ''}">
                                         ${item.name}
                                 </a>

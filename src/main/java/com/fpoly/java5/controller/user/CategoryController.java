@@ -1,45 +1,81 @@
 package com.fpoly.java5.controller.user;
 
-
-import com.fpoly.java5.entity.Category;
 import com.fpoly.java5.entity.Product;
-import com.fpoly.java5.service.CategoryService;
+import com.fpoly.java5.repo.ProductRepository;
 import com.fpoly.java5.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/product")
 public class CategoryController {
-
+    private static final int PAGE_SIZE = 1;
     @Autowired
     ProductService productService;
+
     @Autowired
-    CategoryService categoryService;
+    ProductRepository repo;
 
-    // localhost:8080/product/{categoryID}
-    @GetMapping("/{categoryID}")
-    public String doGetProductbyCgrId(@PathVariable("categoryID") String categoryId, Model model) {
-//        List<Product> productList = productService.findByCategoryId(categoryId);
-//        model.addAttribute("productList", productList);
-        List<Category> categoryList = categoryService.findAll();
-        model.addAttribute("categoryList",categoryList);
-
-        return "detailProduct";
+    @RequestMapping("/categories/all")
+    public String index(Model model, @RequestParam("page") Optional<Integer> page) {
+        long totalElements = productService.count();
+        Pageable pageable = getPageable(page, totalElements);
+        Page<Product> products = productService.findAll(pageable);
+        addAttribute(model, products);
+        return "product/index";
     }
 
-    // localhost:8080/product?productID=???
-    @GetMapping("")
-    public String doGetProductById(@RequestParam("productID") String productId, Model model) {
-        Product product = productService.findByProductId(productId);
-        model.addAttribute("product", product);
-        List<Category> categoryList = categoryService.findAll();
-        model.addAttribute("categoryList", categoryList);
-        return "detailProduct";
+    @RequestMapping("/categories/{categoryId}")
+    public String byCategory(Model model, @PathVariable String categoryId, @RequestParam("page") Optional<Integer> page) {
+        long totalElements = productService.countByCategoryId(categoryId);
+        Pageable pageable = getPageable(page, totalElements);
+        Page<Product> products = productService.findByCategoryId(categoryId, pageable);
+        addAttribute(model, products);
+        return "product/index";
+    }
+
+    private Pageable getPageable(Optional<Integer> page, long totalElements) {
+        int pageNumber = getPageNumber(page, totalElements);
+        return PageRequest.of(pageNumber, PAGE_SIZE);
+    }
+
+    private void addAttribute(Model model, Page page) {
+        model.addAttribute("products", page.getContent());
+        model.addAttribute("pages", getPages(page));
+        model.addAttribute("page", page);
+    }
+
+    private int[] getPages(Page page) {
+        int current = page.getNumber() + 1;
+        if (page.getTotalPages() > 3) {
+            if (page.isFirst())
+                return new int[]{current, current + 1, current + 2};
+            else if (page.isLast())
+                return new int[]{current - 2, current - 1, current};
+            else return new int[]{current - 1, current, current + 1};
+        }
+        int[] array = new int[page.getTotalPages()];
+        for (int i = 1; i <= page.getTotalPages(); i++) {
+            array[i] = i;
+        }
+        return array;
+    }
+
+    private int getPageNumber(Optional<Integer> page, long totalElements) {
+        int totalPages = (int) Math.ceil(totalElements * 1d / PAGE_SIZE);
+        int pageNumber = page.orElse(1);
+
+        return pageNumber <= 0 ? 0 :
+                pageNumber > totalPages ?
+                        totalPages - 1 : pageNumber - 1;
     }
 
 }

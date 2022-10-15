@@ -21,7 +21,7 @@ public class DataInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String uri = request.getRequestURI();
         boolean isAbout = uri.startsWith("/about");
-        boolean isProduct = uri.startsWith("/products");
+        boolean isProduct = uri.startsWith("/products") || uri.startsWith("/categories");
         boolean isContact = uri.startsWith("/contact");
         boolean isHome = !(isAbout || isProduct || isContact);
         request.setAttribute("uri", uri);
