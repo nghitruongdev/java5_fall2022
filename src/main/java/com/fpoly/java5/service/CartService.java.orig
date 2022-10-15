@@ -1,0 +1,12 @@
+package com.fpoly.java5.service;
+
+<<<<<<< HEAD
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 5de9d14 (ProductController added)
+import org.springframework.stereotype.Service;
+
+@Service
+public class CartService {
+
+}
