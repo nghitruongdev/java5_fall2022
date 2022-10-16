@@ -4,6 +4,7 @@ import com.fpoly.java5.repo.CategoryRepository;
 import com.fpoly.java5.repo.ProductRepository;
 import com.fpoly.java5.service.CartService;
 import com.fpoly.java5.service.CategoryService;
+import com.fpoly.java5.service.LoginService;
 import com.fpoly.java5.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class DataInterceptor implements HandlerInterceptor {
     @Autowired
     CartService cartService;
 
+    @Autowired
+    LoginService loginService;
+
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String uri = request.getRequestURI();
@@ -37,6 +41,8 @@ public class DataInterceptor implements HandlerInterceptor {
         request.setAttribute("isHome", isHome);
         request.setAttribute("categories", categoryService.findAll());
         request.setAttribute("cart", cartService);
+
+        request.setAttribute("savedUser", loginService.getSaveUser());
     }
 
     @Override

@@ -19,7 +19,6 @@ public class LoginService {
     @Autowired
     CookieService cookieService;
 
-
     public boolean login(User localUser) {
         boolean remember = paramService.getBoolean("remember", false);
         User userDb = repo.findByUsername(localUser.getUsername());
@@ -32,28 +31,23 @@ public class LoginService {
         return false;
     }
 
-    //    public User getSaveUser() {
-//        String username = cookieService.getValue("username");
-//        String password = cookieService.getValue("password");
-//        User user = null;
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        return username == null ? null : user;
-//    }
-//
+    public User getSaveUser() {
+        String username = cookieService.getValue("username");
+        String password = cookieService.getValue("password");
+        return username == null ? null : new User(username, password);
+    }
 
 
     public void logout() {
-        session.remove("user");
+        session.remove("loggedInUser");
     }
 
     private boolean checkLoginInfo(User userDb, User localUser) {
-        return localUser.equals(userDb);
+        return userDb != null && userDb.getPassword().equals(localUser.getPassword());
     }
 
     private void saveLoginInfo(User user, boolean remember) {
         if (remember) {
-            System.out.println(remember);
             int hoursRemember = 10 * 24;
             cookieService.add("username", user.getUsername(), hoursRemember);
             cookieService.add("password", user.getPassword(), hoursRemember);

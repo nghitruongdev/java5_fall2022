@@ -14,17 +14,19 @@
                     <div class="form-group mb-3">
                         <label for="username">Username</label>
                         <input name="username" type="text" class="form-control rounded-3" id="username"
+                               value="${savedUser.username}"
                                placeholder="Username">
                     </div>
                     <div class="form-group mb-3">
                         <label for="password">Password</label>
                         <input name="password" type="password" class="form-control rounded-3" id="password"
+                               value="${savedUser.password}"
                                placeholder="Password">
                     </div>
                     <div class="row mx-0">
                         <div class="form-group form-check mb-4 col-6">
                             <input name="remember" type="checkbox" class="form-check-input" value="true"
-                                   id="check-remember">
+                                   id="check-remember" ${savedUser != null ? 'checked' : ''}>
                             <label class="form-check-label" for="check-remember">Remember</label>
                         </div>
                         <div class="col-6"><a href="#" class="">Forgot Password?</a></div>

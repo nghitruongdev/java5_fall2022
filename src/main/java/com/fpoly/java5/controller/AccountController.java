@@ -25,13 +25,12 @@ public class AccountController {
     @PostMapping("/account/login") // Login
     public String login(Model model, User user) {
         boolean result = loginService.login(user);
-        model.addAttribute("users", repo.findAll());
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
         return result ?
                 ((User) session.get("loggedInUser")).isAdmin() ?
-                        "admin/index" :
-                        "home/index" :
-                "home/index";
+                        "redirect:/admin" :
+                        "redirect:/" :
+                "redirect:/";
     }
 
     // Logout -> return to index
