@@ -1,6 +1,10 @@
 package com.fpoly.java5.helper;
 
+<<<<<<< HEAD
 import com.fpoly.java5.model.entity.Product;
+=======
+import com.fpoly.java5.entity.Product;
+>>>>>>> 0dee94313265d9c1d447fbef9eeca70b913d2e26
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

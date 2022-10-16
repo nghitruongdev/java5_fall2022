@@ -10,7 +10,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../assets/css/userInfo.css">
+=======
+    <link rel="stylesheet" href="..../css/userInfo.css">
+>>>>>>> 0dee94313265d9c1d447fbef9eeca70b913d2e26
 </head>
 <body>
 <section class="vh-100" style="background-color: #ffffff;">

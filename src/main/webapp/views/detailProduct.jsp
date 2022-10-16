@@ -17,7 +17,11 @@
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
     <link rel="stylesheet" href="css/detailProduct.css">
+<<<<<<< HEAD
     <script src="../assets/js/detailProduct.js"></script>
+=======
+    <script src="js/detailProduct.js"></script>
+>>>>>>> 0dee94313265d9c1d447fbef9eeca70b913d2e26
     <title>DetailProduct</title>
 </head>
 <body>

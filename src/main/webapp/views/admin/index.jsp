@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
@@ -714,3 +715,21 @@
 </body>
 
 </html>
+=======
+<%--
+  Created by IntelliJ IDEA.
+  User: USER
+  Date: 10/14/2022
+  Time: 11:31 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+>>>>>>> 0dee94313265d9c1d447fbef9eeca70b913d2e26

@@ -92,6 +92,7 @@ ALTER TABLE `order_details`
 ;
 
 INSERT INTO categories(id, name, note)
+<<<<<<< HEAD
 VALUES (N'ct1',N'Tee', N'Áo phông 2hands'),
 (N'ct2',N'Polo',N'Áo Polo 2hands'),
 (N'ct3',N'Hoodie & Sweater',N'Hoodie và Sweater 2hands'),
@@ -101,6 +102,17 @@ VALUES (N'ct1',N'Tee', N'Áo phông 2hands'),
 
 INSERT INTO products(id, name, price, description, img, quantity, category_id)
 VALUES  (N'sp01',N'áo thun trơn trắng',150000.000, N'Sản phẩm áo thun nam siêu thoáng mát',N'tee1.jpg',10,N'ct1'),
+=======
+VALUES ('ct1','Tee','Áo phông 2hands'),
+('ct2','Polo','Áo Polo 2hands'),
+('ct3','Hoodie & Sweater','Hoodie và Sweater 2hands'),
+('ct4','Cargo Pants','Cargo Pants 2hands'),
+('ct5','Jean','Jean 2hands'),
+('ct6','accessories','accessories 2hands');
+
+INSERT INTO products(id, name, price, description, img, quantity, category_id)
+VALUES  ('sp01','áo thun trơn trắng',150000.000,'Sản phẩm áo thun nam siêu thoáng mát','tee1.jpg',10,'ct1'),
+>>>>>>> 0dee94313265d9c1d447fbef9eeca70b913d2e26
 ('sp02','áo thun trơn đen',150000.000,'Sản phẩm áo thun đen siêu thoáng mát, đễ phối đồ','tee2.jpg',10,'ct1'),
 ('sp03','áo balo đen trơn',150000.000,'Áo balo đen trơn phù hợp ngày hè, vải mát 100% cotton','tee3.jpg',10,'ct1'),
 ('sp04','áo sơmi nam trắng',150000.000,'Sản phẩm áo sơmi nam phù hợp cho dân văn phòng mang đi làm','tee4.jpg',10,'ct1'),
