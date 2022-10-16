@@ -7,10 +7,7 @@ import org.springframework.format.annotation.NumberFormat;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Getter
@@ -32,26 +29,26 @@ public class User {
     private int id;
 
     @Column(name = "username", nullable = false, length = 50)
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Username cannot be null")
+    @NotNull(message = "Not null")
     @NotBlank
     private String username;
 
     @Column(name = "password", nullable = true, length = 50)
     @NotBlank
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Not null")
+    @NotEmpty(message = "Password cannot be null")
     private String password;
 
     @Column(name = "full_name", nullable = true, length = 50)
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Cannot be null")
     private String fullName;
 
     @Column(name = "email", nullable = true, length = 50)
-    @Email
-    @NotNull
-    @NotEmpty
+    @Email(message = "Wrong email type")
+    @NotNull(message = "Not null")
+    @NotEmpty(message = "Email cannot be null")
     private String email;
 
     @Column(name = "phone", nullable = true, length = 10)

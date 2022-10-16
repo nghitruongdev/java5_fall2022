@@ -7,7 +7,10 @@ import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class AccountController {
@@ -44,6 +47,9 @@ public class AccountController {
     // Action register form
     @PostMapping("/account/register")
     public String register(@ModelAttribute User user, Model model) {
+    public String doGetRegister(Model model,
+                                @ModelAttribute @Valid User user,
+                                BindingResult result) {
         // Check if the data entered by the customer exists or not (If existed return to register page)
         if (userService.isUserExist(user)) {
             model.addAttribute("error", "User already existed");
@@ -55,6 +61,15 @@ public class AccountController {
             model.addAttribute("message", "Sign Up Success");
             return "redirect:/";
         }
+        if (result.hasErrors()) {
+            model.addAttribute("message", "Cannot register! Please enter your information");
+            return "redirect:/account/register";
+        } else {
+            model.addAttribute("message", "Are field valid");
+        }
+        repo.save(user);
+        return "redirect:/";
+
     }
 
 
