@@ -3,6 +3,7 @@ package com.fpoly.java5.controller;
 import com.fpoly.java5.model.entity.User;
 import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
+import com.fpoly.java5.service.ParamService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ public class AccountController {
     UserRepository repo;
     @Autowired
     UserService userService;
+    @Autowired
+    ParamService paramService;
 
 
 
@@ -36,7 +39,7 @@ public class AccountController {
     public String doGetLogin(Model model) {
         boolean result = loginService.login();
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-        return loginService.getAdmin() ?
+        return loginService.getAdmin(paramService.getString("username","")) ?
                 "redirect:/admin" :
                 "redirect:/user";
 

@@ -1,6 +1,6 @@
 package com.fpoly.java5.helper;
 
-import com.fpoly.java5.entity.Product;
+import com.fpoly.java5.model.entity.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
