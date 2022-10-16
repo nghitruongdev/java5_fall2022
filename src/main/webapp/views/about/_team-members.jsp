@@ -22,9 +22,9 @@
             </div>
           </div>
           <div class="down-content">
-            <h4>Johnny William</h4>
+            <h4>Truong Vinh Nghi</h4>
             <span>CO-Founder</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing itaque corporis nulla.</p>
+            <p>I will conquer the world by my own mind, forcing them to be my slaves</p>
           </div>
         </div>
       </div>
