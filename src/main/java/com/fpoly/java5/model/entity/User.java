@@ -27,7 +27,6 @@ public class User {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
-
     @Column(name = "username", nullable = false, length = 50)
     @NotEmpty(message = "Username cannot be null")
     @NotNull(message = "Not null")

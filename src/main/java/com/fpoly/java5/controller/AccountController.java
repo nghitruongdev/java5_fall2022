@@ -1,9 +1,10 @@
 package com.fpoly.java5.controller;
 
 import com.fpoly.java5.model.entity.User;
+import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
 import com.fpoly.java5.service.MailService;
-import com.fpoly.java5.service.SessionService;
+import com.fpoly.java5.service.ParamService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Controller
 public class AccountController {
 
@@ -19,6 +23,10 @@ public class AccountController {
     LoginService loginService;
     @Autowired
     UserService userService;
+    @Autowired
+    ParamService paramService;
+    @Autowired
+    MailService mailService;
 
     @PostMapping("/account/login") // Login
     public String login(Model model, User user, SessionService session) {
@@ -60,6 +68,7 @@ public class AccountController {
         return "redirect:/";
 
     }
+
 
 
     // Forgot password open form
