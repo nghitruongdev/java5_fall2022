@@ -1,5 +1,7 @@
 package com.fpoly.java5.helper;
 
+import com.fpoly.java5.entity.Product;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -7,8 +9,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
-public class imgHelper {
+public class ProductHelper {
+    public int getTotalPage(int soSanPham, List<Product> list){
+        int tongSoSanPham = list.size();
+        int tongSoTrang = 1;
+        float tempFloat = (float)tongSoSanPham/soSanPham;
+        int tempInt= (int) tempFloat;
+        if (tempFloat -tempInt >0){
+            tongSoTrang= tempInt+1;
+        }else {
+            tongSoTrang= tempInt;
+        }
+        return tongSoTrang;
+
+    }
     public String uploadImage(HttpServletRequest req) throws IOException, ServletException {
         // đường dẫn thư mục tính từ gốc của website
         File dir = new File(req.getServletContext().getRealPath("/images/sp"));
