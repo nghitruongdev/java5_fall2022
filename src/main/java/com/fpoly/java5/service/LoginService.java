@@ -43,8 +43,8 @@ public class LoginService {
         return false;
     }
 
-    public boolean getAdmin() {
-        User user = sessionService.get("user");
+    public boolean getAdmin(String username) {
+        User user = repo.findByUsername(username);
         return user.isAdmin();
     }
 //

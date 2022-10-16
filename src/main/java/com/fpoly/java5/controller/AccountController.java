@@ -3,11 +3,16 @@ package com.fpoly.java5.controller;
 import com.fpoly.java5.model.entity.User;
 import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
+import com.fpoly.java5.service.MailService;
+import com.fpoly.java5.service.ParamService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class AccountController {
@@ -18,6 +23,10 @@ public class AccountController {
     UserRepository repo;
     @Autowired
     UserService userService;
+    @Autowired
+    ParamService paramService;
+    @Autowired
+    MailService mailService;
 
 
 
@@ -36,7 +45,7 @@ public class AccountController {
     public String doGetLogin(Model model) {
         boolean result = loginService.login();
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-        return loginService.getAdmin() ?
+        return loginService.getAdmin(paramService.getString("username","")) ?
                 "redirect:/admin" :
                 "redirect:/user";
 
@@ -84,16 +93,17 @@ public class AccountController {
     @PostMapping("/account/register")
     public String doGetRegister(@ModelAttribute User user, Model model) {
         // Check if the data entered by the customer exists or not (If existed return to register page)
-        if (userService.isUserExist(user)) {
-            model.addAttribute("error", "User already existed");
-            return "redirect:/register";
+        if (user == null) {
+            model.addAttribute("error", "Cannot register! Please enter your information");
+            return "redirect:/account/register";
         }
-        // If not existed, save user -> return to login to continue login
-        else {
-            repo.save(user);
-            model.addAttribute("message", "Sign Up Success");
-            return "redirect:/account/login";
+        if (repo.existsByUsername(user.getUsername()) ) {
+            model.addAttribute("error","Already existed");
+            return "redirect:/account/register";
         }
+        repo.save(user);
+        return "redirect:/";
+
     }
 
 
@@ -119,7 +129,7 @@ public class AccountController {
 
             String subject = "Get your password";
             String body = "Your password is: " + randomInt;
-//            mail.send(to, subject, body); // Gui mail lay lai mat khau
+            mailService.send(to, subject, body); // Gui mail lay lai mat khau
             user.setPassword(String.valueOf(randomInt));
             repo.save(user);
             model.addAttribute("message", "Password has been sent to email: " + email);

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -35,6 +37,11 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
+                                            <input type="text" id="username" class="form-control form-control-lg" name="username"/>
+                                            <label class="form-label" for="username">Username</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
                                             <input type="password" id="password" class="form-control form-control-lg" name="password"/>
                                             <label class="form-label" for="password">Password</label>
                                         </div>
@@ -56,11 +63,13 @@
                                                 I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                                             </label>
                                         </div>
+                                        <t1>${error}</t1>
 
                                         <div class="d-flex justify-content-center">
-                                            <button type="button"
+                                            <button type="submit"
                                                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                         </div>
+
 
                                         <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
                                                                                                                 class="fw-bold text-body"><u>Login here</u></a></p>
