@@ -13,42 +13,26 @@ public class LoginService {
     @Autowired
     UserRepository repo;
     @Autowired
-    SessionService sessionService;
-
+    SessionService session;
     @Autowired
     ParamService paramService;
-
     @Autowired
     CookieService cookieService;
 
 
-    public boolean login() {
-        String username = paramService.getString("username", "");
-        String password = paramService.getString("password", "");
+    public boolean login(User localUser) {
         boolean remember = paramService.getBoolean("remember", false);
-        // Create local user to store client input
-        User localUser = new User();
-        // Local user will now store username and password from client
-        localUser.setUsername(username);
-        localUser.setPassword(password);
-        // Use database user to compare with client input
-        User userDb = repo.findByUsername(username);
-        // Check if client input is equal to database user or not
+        User userDb = repo.findByUsername(localUser.getUsername());
         if (checkLoginInfo(userDb, localUser)) {
             saveLoginInfo(userDb, remember);
-            sessionService.add("user", userDb);
+            session.add("loggedInUser", userDb);
             return true;
         }
         removeLoginInfo();
         return false;
     }
 
-    public boolean getAdmin() {
-        User user = sessionService.get("user");
-        return user.isAdmin();
-    }
-//
-//    public User getSaveUser() {
+    //    public User getSaveUser() {
 //        String username = cookieService.getValue("username");
 //        String password = cookieService.getValue("password");
 //        User user = null;
@@ -59,17 +43,12 @@ public class LoginService {
 //
 
 
-
     public void logout() {
-        sessionService.remove("user");
+        session.remove("user");
     }
 
     private boolean checkLoginInfo(User userDb, User localUser) {
         return localUser.equals(userDb);
-    }
-
-    private boolean checkAdmin(User user) {
-        return user.isAdmin();
     }
 
     private void saveLoginInfo(User user, boolean remember) {

@@ -44,10 +44,10 @@
                         </a>
                     </li>
 
-                    <c:if test="${user == null}">
+                    <c:if test="${loggedInUser == null}">
                         <c:import url="../auth/_login.jsp"/>
                     </c:if>
-                    <c:if test="${user != nul}">
+                    <c:if test="${loggedInUser != nul}">
                         <li class="nav-item dropdown text-left mt-2">
                             <a class=" p-0 text-white" href="#" role="button" data-toggle="dropdown"
                                aria-expanded="false">

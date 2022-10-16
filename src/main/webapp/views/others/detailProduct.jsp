@@ -16,14 +16,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
-    <link rel="stylesheet" href="css/detailProduct.css">
-<<<<<<< HEAD
-    <script src="../assets/js/detailProduct.js"></script>
-=======
-
-    <script src="../static/js/detailProduct.js"></script>
-
->>>>>>> db67481 (adding new stuff)
+    <link rel="stylesheet" href="../css/detailProduct.css">
+    <script src="../../assets/js/detailProduct.js"></script>
     <title>DetailProduct</title>
 </head>
 <body>

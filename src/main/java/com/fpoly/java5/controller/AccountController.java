@@ -3,6 +3,7 @@ package com.fpoly.java5.controller;
 import com.fpoly.java5.model.entity.User;
 import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
+import com.fpoly.java5.service.SessionService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,28 +19,19 @@ public class AccountController {
     UserRepository repo;
     @Autowired
     UserService userService;
+    @Autowired
+    SessionService session;
 
-
-
-
-    // Open login form
-    @RequestMapping("/account/login")
-    public String getLogin() {
-        return "login_form";
-    }
-
-
-    // Login form
-    // If user is admin redirect to admin page
-    // If user is normal user redirect to user page
     @PostMapping("/account/login") // Login
-    public String doGetLogin(Model model) {
-        boolean result = loginService.login();
+    public String login(Model model, User user) {
+        boolean result = loginService.login(user);
+        model.addAttribute("users", repo.findAll());
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-        return loginService.getAdmin() ?
-                "redirect:/admin" :
-                "redirect:/user";
-
+        return result ?
+                ((User) session.get("loggedInUser")).isAdmin() ?
+                        "admin/index" :
+                        "home/index" :
+                "home/index";
     }
 
     // Logout -> return to index
@@ -49,53 +41,27 @@ public class AccountController {
         return "redirect:/";
     }
 
-    // Open Register form
-//    @GetMapping("/account/register")
-//    public String doGetRegister(WebRequest request, Model model) {
-//        UserDto userDto = new UserDto(); // creates the new UserDto object, which backs the registration form, binds it, and returns
-//        model.addAttribute("user", userDto);
-//        return "register";
-//    }
-//
-//    @PostMapping("/account/register")
-//    public ModelAndView registerUserAccount(@ModelAttribute("model") @Valid UserDto userDto,
-//                                            HttpServletRequest request,
-//                                            Errors errors,
-//                                            ModelAndView mv) {
-//        try {
-//            User registered = userService.registerNewUserAccount(userDto);
-//        } catch (Exception uaeEx) {
-//            mv.addObject("message", "An account for that username/email already exists.");
-//            return mv;
-//        }
-//        // return registered user - successRegister view
-//        return new ModelAndView("successRegister", "user", userDto);
-//
-//    }
-
-
     // Open register form
-    @GetMapping("/account/register")
+    @RequestMapping("/account/register")
     public String getRegister() {
-        return "register";
+        return "others/register";
     }
 
     // Action register form
     @PostMapping("/account/register")
-    public String doGetRegister(@ModelAttribute User user, Model model) {
+    public String register(@ModelAttribute User user, Model model) {
         // Check if the data entered by the customer exists or not (If existed return to register page)
         if (userService.isUserExist(user)) {
             model.addAttribute("error", "User already existed");
-            return "redirect:/register";
+            return "others/register";
         }
         // If not existed, save user -> return to login to continue login
         else {
             repo.save(user);
             model.addAttribute("message", "Sign Up Success");
-            return "redirect:/account/login";
+            return "redirect:/";
         }
     }
-
 
 
     // Forgot password open form

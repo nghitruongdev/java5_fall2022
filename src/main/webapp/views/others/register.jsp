@@ -35,6 +35,11 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
+                                            <input type="text" id="username" class="form-control form-control-lg" name="username"/>
+                                            <label class="form-label" for="username">Username</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
                                             <input type="password" id="password" class="form-control form-control-lg" name="password"/>
                                             <label class="form-label" for="password">Password</label>
                                         </div>
@@ -58,7 +63,7 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center">
-                                            <button type="button"
+                                            <button type="submit"
                                                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                         </div>
 

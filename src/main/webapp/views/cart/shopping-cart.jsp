@@ -3,11 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <c:import url="common-css-links.jsp"/>
+    <c:import url="../others/common-css-links.jsp"/>
     <title>Shopping Cart</title>
 </head>
 <body>
-<c:import url="header.jsp"/>
+<c:import url="../layout/_header.jsp"/>
 <section id="cart-container" class="" style="background-color: rgba(234,244,255,0.75);">
     <div class="container py-5">
         <div class="row d-flex justify-content-center my-4">
@@ -17,14 +17,14 @@
                         <h5 class="mb-0"><a href="/" class="text-body text-decoration-none"><i
                                 class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a>
                         </h5>
-                        <h5 class="mb-0">Cart - ${cart.items.size()} items</h5>
+                        <h5 class="mb-0">Cart - ${cart.size} items</h5>
                     </div>
                     <div class="card-body">
-                        <c:if test="${!(cart.items.size()>0)}">
+                        <c:if test="${!(cart.size>0)}">
                             <img src="https://rtworkspace.com/wp-content/plugins/rtworkspace-ecommerce-wp-plugin/assets/img/empty-cart.png"
                                  alt="" class="img-fluid">
                         </c:if>
-                        <c:if test="${cart.items.size()>0}">
+                        <c:if test="${cart.size>0}">
                             <c:forEach items="${cart.items}" var="item" varStatus="status">
                                 <!-- Single item -->
                                 <div class="row">

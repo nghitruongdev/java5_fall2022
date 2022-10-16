@@ -23,12 +23,23 @@ public class CartService {
         return map.merge(id, product, (o1, o2) -> orderProduct(o1));
     }
 
+    public Product update(String id, int quantity) {
+        return map.computeIfPresent(id, (key, item) -> orderProduct(item, quantity));
+    }
+
     public Product remove(String id) {
         return map.remove(id);
     }
 
     private Product orderProduct(Product product) {
-        product.setQuantity(product.getQuantity() + 1);
+        return orderProduct(product, product.getQuantity() + 1);
+    }
+
+    private Product orderProduct(Product product, int quantity) {
+//        int stock = service.findById(product.getId()).get().getQuantity();
+        if (quantity <= 0) throw new RuntimeException("Số lượng sản phẩm không hợp lệ");
+//        if (quantity > stock) throw new RuntimeException("Không ")
+        product.setQuantity(quantity);
         return product;
     }
 
@@ -50,75 +61,11 @@ public class CartService {
                 .reduce(Integer::sum).orElse(0);
     }
 
-    public Collection<Product> getList() {
+    public Collection<Product> getItems() {
         return map.values();
     }
 
-//       Map<Integer, Item> map = new HashMap<>();
-//    Map<Integer, Item> db = Item.ITEM_DB;
-//
-//    @SneakyThrows
-//    @Override
-//    public Item add(Integer id) {
-//        Item item = db.get(id);
-//        Item cartItem = (Item) item.clone();
-//        cartItem.setQuantity(1);
-//        return map.containsKey(id) ?
-//                update(id, map.get(id).getQuantity() + 1) :
-//                map.put(id, cartItem);
-//    }
-//
-//    @Override
-//    public Item update(Integer id, int qty) {
-//        int stock = db.get(id).getQuantity();
-//        if(qty <= 0)
-//            throw new RuntimeException("Số lượng không hợp lệ!");
-//        if (qty > stock)
-//            throw new RuntimeException("Không đủ số lượng tồn kho!");
-//
-//        return map.computeIfPresent(id, (key, item) -> {
-//            item.setQuantity(qty);
-//            return item;
-//        });
-//    }
-//
-//    @Override
-//    public void remove(Integer id) {
-//        map.remove(id);
-//    }
-//
-//
-//    @Override
-//    public void clear() {
-//        map.clear();
-//    }
-//
-//    @Override
-//    public Collection<Item> getItems() {
-//        return map.values();
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return map.entrySet()
-//                .stream()
-//                .map(item -> item.getValue().getQuantity())
-//                .reduce(Integer::sum).orElse(0);
-//    }
-//
-//    @Override
-//    public double getAmount() {
-//        Function<Map.Entry<Integer, Item>, Double>
-//                getItemAmount = (entry) -> getAmount(entry);
-//        return map.entrySet()
-//                .stream()
-//                .map(getItemAmount)
-//                .reduce(Double::sum)
-//                .orElse(0d);
-//    }
-//
-//    private double getAmount(Map.Entry<Integer, Item> entry) {
-//        Item item = entry.getValue();
-//        return item.getPrice() * item.getQuantity();
-//    }
+    public double getAmount() {
+        return map.values().stream().map(p -> p.getPrice() * p.getQuantity()).reduce(Double::sum).orElse(0d);
+    }
 }

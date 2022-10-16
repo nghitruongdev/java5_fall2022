@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <footer>
     <div class="container">
         <div class="row">
@@ -8,6 +9,7 @@
                         - Design: <a rel="nofollow noopener" href="https://templatemo.com"
                                      target="_blank">TemplateMo</a></p>
                     <p>${uri}</p>
+                    <p>${message}</p>
                 </div>
             </div>
         </div>

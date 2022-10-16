@@ -4,6 +4,7 @@ import com.fpoly.java5.service.CartService;
 import com.fpoly.java5.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,11 +23,17 @@ public class CartController {
     @Autowired
     HttpServletRequest request;
 
+    @RequestMapping("/view")
+    public String viewCart(Model model) {
+        return "cart/shopping-cart";
+    }
+
     @RequestMapping("/add/{id}")
     public String add(@PathVariable String id) {
-        try{
+        try {
             cart.add(id);
-        }catch (NoSuchElementException e) {}
+        } catch (NoSuchElementException e) {
+        }
         return "redirect:" + getPreviousPage();
     }
 
