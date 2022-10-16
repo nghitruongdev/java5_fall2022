@@ -7,7 +7,7 @@
                     <ul>
                         <li class="" data-filter="*">
                             <a href="/categories/all"
-                               class="nav-link ${uri.substring(uri.lastIndexOf("/") + 1).startsWith("products")? 'active' : ''}">All
+                               class="nav-link ${uri.substring(uri.lastIndexOf("/") + 1).startsWith("categories")? 'active' : ''}">All
                                 Products</a>
                         </li>
                         <c:forEach items="${categories}" var="item" varStatus="status">
@@ -30,7 +30,7 @@
                         <c:forEach items="${products}" var="item">
                             <div class="col-md-4">
                                 <div class="product-item">
-                                    <a href="#"><img src="../../assets/images/product_01.jpg" alt=""></a>
+                                    <a href="/cart/add/${item.id}"><img src="../../assets/images/product_01.jpg" alt=""></a>
                                         <%--    <a href="#"><img src="${item.img}" alt=""></a>--%>
                                     <div class="down-content">
                                         <a href="#">

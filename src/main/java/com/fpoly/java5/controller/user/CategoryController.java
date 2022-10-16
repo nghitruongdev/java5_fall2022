@@ -50,7 +50,8 @@ public class CategoryController {
     private void addAttribute(Model model, Page page) {
         model.addAttribute("products", page.getContent());
         model.addAttribute("page", page);
-        addPages(model, page);
+        if (page.getTotalPages() > 0)
+            addPages(model, page);
     }
 
     private void addPages(Model model, Page page) {
@@ -71,9 +72,8 @@ public class CategoryController {
         int totalPages = (int) Math.ceil(totalElements * 1d / PAGE_SIZE);
         int pageNumber = page.orElse(1);
 
-        return pageNumber <= 0 ? 0 :
+        return totalPages == 0 || pageNumber <= 0 ? 0 :
                 pageNumber > totalPages ?
                         totalPages - 1 : pageNumber - 1;
     }
-
 }

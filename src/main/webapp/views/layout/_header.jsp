@@ -40,7 +40,7 @@
                     <li class="nav-item ml-auto mt-2 position-relative">
                         <a href="#" class="nav-icon-link">
                             <span class="fa fa-cart-plus nav-icon"></span>
-                            <span id="cart-badge" class="badge badge-pill badge-danger text-white">1</span>
+                            <span id="cart-badge" class="badge badge-pill badge-danger text-white">${cart.count}</span>
                         </a>
                     </li>
 

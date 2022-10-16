@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -27,8 +28,8 @@ public class ProductService {
         return repo.findByCategoryId(id, pageable);
     }
 
-    public Product findByProductId(String id) {
-        return repo.findById(id).orElse(null);
+    public Optional<Product> findById(String id) {
+        return repo.findById(id);
     }
 
     public Long count() {
