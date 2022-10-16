@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="send-message">
     <div class="container">
         <div class="row">
@@ -8,18 +10,18 @@
             </div>
             <div class="col-md-8">
                 <div class="contact-form">
-                    <form id="contact" action="" method="post" enctype="multipart/form-data">
+                    <form id="contact" action="${pageContext.request.contextPath}/contact/sent" method="post" enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name"
+                                    <input name="from" type="text" class="form-control" id="name"
                                            placeholder="Full Name" required="">
                                 </fieldset>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <fieldset>
-                                    <input name="email" type="text" class="form-control" id="email"
+                                    <input name="to" type="text" class="form-control" id="email"
                                            placeholder="E-Mail Address"
                                            required="">
                                 </fieldset>
@@ -40,22 +42,23 @@
                                 </div>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                           multiple="multiple">
+                                           multiple="multiple" name="attachments">
                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <fieldset>
-                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message"
+                    <textarea name="body" rows="6" class="form-control" id="message" placeholder="Your Message"
                               required=""></textarea>
                                 </fieldset>
                             </div>
                             <div class="col-lg-6">
                                 <fieldset>
                                     <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                                    <t1>${message}</t1>
                                 </fieldset>
-                            </div>
 
+                            </div>
                         </div>
                     </form>
                 </div>

@@ -1,9 +1,8 @@
 package com.fpoly.java5.controller;
 
 import com.fpoly.java5.model.entity.User;
+import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.LoginService;
-import com.fpoly.java5.service.MailService;
-import com.fpoly.java5.service.SessionService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
