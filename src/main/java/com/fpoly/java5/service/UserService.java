@@ -8,38 +8,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class UserService { //implements IUserService {
+public class UserService {
 
     @Autowired
     UserRepository repo;
 
-//    public boolean validateUser(User user) {
-//
-//    }
 
-//    @Override
-//    public User registerNewUserAccount(UserDto userDto) throws Exception {
-//        if (emailExists(userDto.getEmail())) {
-//            throw new Exception("There is an account with that email address: "
-//                    + userDto.getEmail());
-//        }
-//        User user = new User();
-//        user.setFullName(userDto.getFullname());
-//        user.setUsername(userDto.getPassword());
-//        user.setEmail(userDto.getEmail());
-//        user.setPhone(user.getPhone());
-//
-//        return repo.save(user);
-//    }
+    public User findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
 
-//    private boolean emailExists(String email) {
-//        return repo.findByEmail(email) != null;
-//    }
+    public User save(User user) {
+        return repo.save(user);
+    }
+
 
     public boolean isUserExist(User user) {
         return repo.existsByUsername(user.getUsername());
     }
-
 
 
 }
