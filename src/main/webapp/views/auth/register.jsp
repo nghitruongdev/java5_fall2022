@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -42,6 +42,11 @@
             background-color: #3b5998;
         }
     </style>
+    <script>
+        if("${message}" != ""){
+            alert("${message}");
+        };
+    </script>
 </head>
 <body>
 <c:import url="../layout/_header.jsp" />
@@ -59,20 +64,23 @@
 
                     </div>
                     <h5 class="card-title fw-light mb-3 text-muted">Đăng ký tài khoản</h5>
-                    <form name="registerForm" class="needs-validation" novalidate>
+                    <form:form action="/account/register" modelAttribute="user" method="post" name="registerForm" class="needs-validation" novalidate>
                         <div class="form-floating mb-3 has-validation">
-                            <input ng-model="user.username" ng-change="checkExistUsername();" ng-minlength="3" ng-max-length="20"
-                                   type="text" name="un"
-                                   class="form-control {{(registerForm.un.$untouched && !registerForm.un.$dirty)? '' : registerForm.un.$invalid? 'is-invalid':'is-valid'}}" id="username" placeholder=" " required>
+                            <input
+                                   type="text" name="username"
+                                   class="form-control"  id="username"
+                                   cssErrorClass="is-invalid form-control">
                             <label class="text-muted fw-light" for="username">Username</label>
-                            <div class="invalid-feedback">{{usernameExists? 'Username đã tồn tại trong hệ thống' : 'Nhập username từ 3 đến 20 kí tự.'}}</div>
+                            <form:errors path="name"/>
+<%--                            <div class="invalid-feedback">{{usernameExists? 'Username đã tồn tại trong hệ thống' : 'Nhập username từ 3 đến 20 kí tự.'}}</div>--%>
                         </div>
                         <div class="form-floating mb-3 has-validation">
-                            <input ng-change="checkExistEmail();" ng-model="user.email" ng-minlength="3" type="email" name="email"
-                                   class="form-control {{(registerForm.email.$untouched && !registerForm.email.$dirty)? '' : registerForm.email.$invalid? 'is-invalid':'is-valid'}}"
+                            <input type="email" name="email"
+                                   class="form-control"
                                    id="email" placeholder="abc@fpt.edu.vn" required>
                             <label class="text-muted fw-light" for="email">Email</label>
-                            <div class="invalid-feedback">{{emailExists? 'Email đã tồn tại trong hệ thống.' : 'Nhập email hợp lệ.'}}</div>
+                            <form:errors path="email" />
+<%--                            <div class="invalid-feedback">{{emailExists? 'Email đã tồn tại trong hệ thống.' : 'Nhập email hợp lệ.'}}</div>--%>
                         </div>
 
                         <div class="form-floating mb-3 has-validation">
@@ -119,7 +127,7 @@
                             </button>
                         </div>
 
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>
