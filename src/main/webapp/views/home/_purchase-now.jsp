@@ -5,9 +5,8 @@
         <div class="inner-content">
           <div class="row">
             <div class="col-md-8">
-              <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite
-                author nulla.
+              <h4>Creative &amp; Unique <em>VNCO</em> Products</h4>
+              <p>To become one of our valued and fashionable customers, come to us
               </p>
             </div>
             <div class="col-md-4">
