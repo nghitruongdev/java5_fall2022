@@ -3,6 +3,10 @@ package com.fpoly.java5.controller;
 import com.fpoly.java5.model.entity.User;
 import com.fpoly.java5.repo.UserRepository;
 import com.fpoly.java5.service.*;
+import com.fpoly.java5.service.LoginService;
+import com.fpoly.java5.service.MailService;
+import com.fpoly.java5.service.ParamService;
+import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +33,13 @@ public class AccountController {
     public String login(Model model, User user, SessionService session) {
         boolean result = loginService.login(user);
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
+
         return result ?
                 ((User) session.get("loggedInUser")).isAdmin() ?
                         "redirect:/admin" :
                         "redirect:/" :
                 "redirect:/";
+
     }
 
     // Logout -> return to index

@@ -1,13 +1,12 @@
 package com.fpoly.java5.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.format.annotation.NumberFormat;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -27,6 +26,7 @@ public class User {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
+
     @Column(name = "username", nullable = false, length = 50)
     @NotEmpty(message = "Username cannot be null")
     @NotNull(message = "Not null")
