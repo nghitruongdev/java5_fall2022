@@ -12,5 +12,7 @@
 <script>
     $(document).ready(() => {
         $('#modalSignin').modal('show');
+        console.log($('#modalSignin'));
+        console.log('hello world')
     });
 </script>

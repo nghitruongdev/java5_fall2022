@@ -38,7 +38,7 @@
                         <a class="nav-link" href="${isContact? '#' : '/contact'}">Contact Us</a>
                     </li>
                     <li class="nav-item ml-auto mt-2 position-relative">
-                        <a href="#" class="nav-icon-link">
+                        <a href="/cart/view" class="nav-icon-link">
                             <span class="fa fa-cart-plus nav-icon"></span>
                             <span id="cart-badge" class="badge badge-pill badge-danger text-white">${cart.count}</span>
                         </a>

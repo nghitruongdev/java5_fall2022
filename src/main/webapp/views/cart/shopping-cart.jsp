@@ -3,7 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <c:import url="../others/common-css-links.jsp"/>
+    <c:import url="../../assets/common-link/common-meta.jsp"/>
+    <c:import url="../../assets/common-link/common-css.jsp"/>
+    <c:import url="../../assets/common-link/common-bootsrap-5.2.jsp"/>
     <title>Shopping Cart</title>
 </head>
 <body>
@@ -32,8 +34,8 @@
                                         <!-- Image -->
                                         <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                              data-mdb-ripple-color="light">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                                                 class="w-100" alt="Blue Jeans Jacket"/>
+                                            <img src="${item.img}"
+                                                 class="w-100" alt="${item.name}"/>
                                             <a href="#!">
                                                 <div class="mask"
                                                      style="background-color: rgba(251, 251, 251, 0.2)"></div>
@@ -45,7 +47,7 @@
                                     <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                         <!-- Data -->
                                         <p><strong>${item.name}</strong></p>
-                                        <p>${item.desc}</p>
+                                        <p>${item.description}</p>
                                         <form action="/cart/remove/${item.id}" class="" method="post">
                                                 <%--                                                onclick="removeItem(${item.id})"--%>
                                             <button type="submit"
@@ -164,6 +166,7 @@
     </div>
 </section>
 <p class="visually-hidden" id="message">${message}</p>
+<c:import url="../../assets/common-link/common-js.jsp"/>
 <script>
     let alertMessage = (message) => {
         if (message != null && !message.length == 0) {

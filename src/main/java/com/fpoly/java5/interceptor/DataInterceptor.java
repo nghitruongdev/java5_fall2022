@@ -1,11 +1,8 @@
 package com.fpoly.java5.interceptor;
 
-import com.fpoly.java5.repo.CategoryRepository;
-import com.fpoly.java5.repo.ProductRepository;
 import com.fpoly.java5.service.CartService;
 import com.fpoly.java5.service.CategoryService;
 import com.fpoly.java5.service.LoginService;
-import com.fpoly.java5.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
 @Service
 public class DataInterceptor implements HandlerInterceptor {

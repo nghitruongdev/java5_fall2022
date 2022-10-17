@@ -9,3 +9,4 @@
 <link rel="stylesheet" href="../assets/css/fontawesome.css">
 <link rel="stylesheet" href="../assets/css/templatemo-sixteen.css">
 <link rel="stylesheet" href="../assets/css/owl.css">
+<script src="https://kit.fontawesome.com/34cc1d8757.js" crossorigin="anonymous"></script>
