@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="">
-    <nav class="navbar navbar-expand">
+    <nav class="navbar navbar-expand-lg ">
         <div class="container">
             <a class="navbar-brand" href="${isHome? '#' : '/'}">
                 <h2>VN<em>CO</em></h2>

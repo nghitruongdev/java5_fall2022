@@ -19,3 +19,8 @@
         }
     }
 </script>
+<script>
+    // $(() => {
+    //     $('#modalSignin').modal('show');
+    // });
+</script>

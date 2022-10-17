@@ -29,7 +29,7 @@
                                    id="check-remember" ${savedUser != null ? 'checked' : ''}>
                             <label class="form-check-label" for="check-remember">Remember</label>
                         </div>
-                        <div class="col-6"><a href="#" class="">Forgot Password?</a></div>
+                        <div class="col-6"><a href="/account/forgot" class="">Forgot Password?</a></div>
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Login</button>
                     <a href="/account/register" class="d-block text-center">Do not have an account? Sign up</a>

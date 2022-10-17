@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cart")
@@ -37,10 +40,22 @@ public class CartController {
         return "redirect:" + getPreviousPage();
     }
 
-    @RequestMapping("/remove/{id}")
+    @PostMapping("/remove/{id}")
     public String remove(@PathVariable String id) {
         cart.remove(id);
-        return "redirect:" + getPreviousPage();
+        return "redirect:/cart/view";
+    }
+
+    @PostMapping("/update")
+    public String update(@RequestParam String id, @RequestParam Optional<Integer> quantity) {
+        cart.update(id, quantity.get());
+        return "redirect:/cart/view";
+    }
+
+    @RequestMapping("/clear")
+    public String clear() {
+        cart.clear();
+        return "redirect:/";
     }
 
     private String getPreviousPage() {

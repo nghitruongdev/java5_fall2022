@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SessionService {
     @Autowired
@@ -17,20 +19,8 @@ public class SessionService {
      * @param name tên attribute
      * @return giá trị đọc được hoặc null nếu không tồn tại
      */
-    public <T> T get(String name) {
-        return (T) session.getAttribute(name);
-    }
-
-    /**
-     * Đọc giá trị của attribute trong session
-     *
-     * @param name         tên attribute
-     * @param defaultValue giá trị mặc định nếu không tồn tại
-     * @return giá trị đọc được hoặc null nếu không tồn tại
-     */
-    public <T> T get(String name, T defaultValue) {
-        T o = (T) session.getAttribute(name);
-        return o == null ? defaultValue : o;
+    public Optional get(String name) {
+        return Optional.ofNullable(session.getAttribute(name));
     }
 
     /**

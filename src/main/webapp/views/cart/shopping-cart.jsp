@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -10,14 +11,14 @@
 </head>
 <body>
 <c:import url="../layout/_header.jsp"/>
-<section id="cart-container" class="" style="background-color: rgba(234,244,255,0.75);">
+<section id="cart-container" class="p-5" style="background-color: rgba(234,244,255,0.75);">
     <div class="container py-5">
         <div class="row d-flex justify-content-center my-4">
             <div class="col-md-8">
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
-                        <h5 class="mb-0"><a href="/" class="text-body text-decoration-none"><i
-                                class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a>
+                        <h5 class="mb-0"><a href="/categories/all" class="text-body text-decoration-none"><i
+                                class="fas fa-long-arrow-alt-left me-2"></i> &nbsp;Continue shopping</a>
                         </h5>
                         <h5 class="mb-0">Cart - ${cart.size} items</h5>
                     </div>
@@ -78,7 +79,8 @@
                                                 <div class="form-outline">
                                                     <input type="hidden" name="id" value="${item.id}">
                                                         <%--                                                        updateItem(this)--%>
-                                                    <input id="form1" onblur="this.form.submit()" min="0" name="qty"
+                                                    <input id="form1" onblur="this.form.submit()" min="0"
+                                                           name="quantity"
                                                            step="1"
                                                            type="number"
                                                            class="form-control" value="${item.quantity}"/>
@@ -96,7 +98,8 @@
 
                                         <!-- Price -->
                                         <p class="text-start text-md-center">
-                                            <strong>$${item.price * item.quantity}</strong>
+                                            <strong><fmt:formatNumber value="${item.price * item.quantity}"
+                                                                      type="CURRENCY" currencyCode="VND"/></strong>
                                         </p>
                                         <!-- Price -->
                                     </div>
@@ -123,7 +126,8 @@
                             <li
                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                 Products
-                                <span>$${cart.amount}</span>
+                                <span><fmt:formatNumber value="${cart.amount}" type="CURRENCY"
+                                                        currencyCode="VND"/></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                 Shipping
@@ -137,7 +141,8 @@
                                         <p class="mb-0">(including VAT)</p>
                                     </strong>
                                 </div>
-                                <span><strong>$${cart.amount}</strong></span>
+                                <span><strong><fmt:formatNumber value="${cart.amount}" type="CURRENCY"
+                                                                currencyCode="VND"/></strong></span>
                             </li>
                         </ul>
 

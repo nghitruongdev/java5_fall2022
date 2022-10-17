@@ -24,7 +24,7 @@ public class CartService {
     }
 
     public Product update(String id, int quantity) {
-        return map.computeIfPresent(id, (key, item) -> orderProduct(item, quantity));
+        return map.computeIfPresent(id, (key, product) -> orderProduct(product, quantity));
     }
 
     public Product remove(String id) {

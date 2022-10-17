@@ -1,13 +1,16 @@
 package com.fpoly.java5.controller;
 
 import com.fpoly.java5.model.entity.User;
+import com.fpoly.java5.service.*;
 import com.fpoly.java5.service.LoginService;
 import com.fpoly.java5.service.MailService;
-import com.fpoly.java5.service.SessionService;
+import com.fpoly.java5.service.ParamService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -17,16 +20,22 @@ public class AccountController {
     LoginService loginService;
     @Autowired
     UserService userService;
+    @Autowired
+    ParamService paramService;
+    @Autowired
+    SessionService session;
 
     @PostMapping("/account/login") // Login
-    public String login(Model model, User user, SessionService session) {
+    public String login(Model model, User user) {
         boolean result = loginService.login(user);
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
+
         return result ?
-                ((User) session.get("loggedInUser")).isAdmin() ?
+                ((User) session.get("loggedInUser").orElse(new User())).isAdmin() ?
                         "redirect:/admin" :
                         "redirect:/" :
                 "redirect:/";
+
     }
 
     // Logout -> return to index
@@ -38,36 +47,37 @@ public class AccountController {
 
     // Open register form
     @RequestMapping("/account/register")
-    public String getRegister() {
+    public String getRegister(@ModelAttribute("user") User user) {
         return "auth/register";
     }
 
     // Action register form
     @PostMapping("/account/register")
-    public String register(@ModelAttribute User user, Model model) {
+    public String register(Model model,
+                           @Validated @ModelAttribute("user") User user,
+                           BindingResult result) {
         // Check if the data entered by the customer exists or not (If existed return to register page)
-        if (userService.isUserExist(user)) {
-            model.addAttribute("error", "User already existed");
-            return "auth/register";
+        if (result.hasErrors()) {
+            model.addAttribute("message", "Cannot register! Please enter your information");
+            return "/account/register";
+        } else {
+            model.addAttribute("message", "Are field valid");
         }
-        // If not existed, save user -> return to login to continue login
-        else {
-            userService.save(user);
-            model.addAttribute("message", "Sign Up Success");
-            return "redirect:/";
-        }
+        userService.save(user);
+        return "redirect:/";
+
     }
 
 
     // Forgot password open form
-    @GetMapping("/account/forgotPassword")
+    @GetMapping("/account/forgot")
     public String forgot() {
         return "forgot";
     }
 
     // Forgot password, send new random number to client's email
     // If client enters wrong email -> Cannot send
-    @PostMapping("/account/forgotPassword")
+    @PostMapping("/account/forgot")
     public String forgot(@RequestParam("username") String username,
                          Model model, MailService mail) {
         try {
