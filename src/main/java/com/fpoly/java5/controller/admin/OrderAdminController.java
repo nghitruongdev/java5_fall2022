@@ -2,10 +2,7 @@ package com.fpoly.java5.controller.admin;
 
 import com.fpoly.java5.model.entity.Product;
 import com.fpoly.java5.service.ProductService;
-<<<<<<< HEAD
 import com.fpoly.java5.service.UploadService;
-=======
->>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,25 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-=======
-
->>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/products")
-public class ProductAdminController {
+public class OrderAdminController {
     @Autowired
     ProductService service;
-<<<<<<< HEAD
     @Autowired
     UploadService upload;
-=======
->>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
     final String PRODUCT_INDEX = "admin/product/index";
 
     @RequestMapping
@@ -56,17 +45,11 @@ public class ProductAdminController {
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute("product") Product product,
                        BindingResult result,
-<<<<<<< HEAD
                        MultipartFile attach,
                        Model model) throws IOException {
         if (!attach.isEmpty()) product.setImg(upload.saveFile(attach));
         if (!result.hasErrors()) {
             service.save(product);
-=======
-                       Model model) {
-        if (!result.hasErrors()) {
-            service.saveAndFlush(product);
->>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
             model.addAttribute("message", "Lưu sản phẩm thành công !");
             model.addAttribute("products", getProducts());
         } else {
@@ -83,10 +66,6 @@ public class ProductAdminController {
         } else {
             model.addAttribute("message", "Không tìm thấy sản phẩm cần xoá!");
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
         return "redirect:/admin/products";
     }
 
