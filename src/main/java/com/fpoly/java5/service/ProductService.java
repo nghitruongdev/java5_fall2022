@@ -39,4 +39,20 @@ public class ProductService {
     public Long countByCategoryId(String id) {
         return repo.countByCategoryId(id);
     }
+
+    public void deleteById(String id) {
+        repo.deleteById(id);
+    }
+
+    public Product save(Product product) {
+        return repo.save(product);
+    }
+
+    public Product saveAndFlush(Product product) {
+        return repo.saveAndFlush(product);
+    }
+
+    public boolean existsById(String id) {
+        return repo.existsById(id);
+    }
 }
