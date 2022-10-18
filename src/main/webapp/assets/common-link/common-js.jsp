@@ -21,14 +21,24 @@
 </script>
 <script type="text/javascript">
     $(() => {
-        if (!sessionStorage.getItem("isLoaded")) {
-
-        }
+        let cart = localStorage.getItem('cart');
+        if (!sessionStorage.getItem("isLoaded") && cart)
+            $.ajax({
+                url: '/cart/api/load',
+                type: 'POST',
+                data: cart,
+                dataType: "JSON",
+                contentType: "application/json",
+                success: (data) => {
+                    $('#cart-badge').text(data);
+                    console.log(data)
+                }
+            })
         sessionStorage.setItem("isLoaded", true);
         $.ajax({
             url: '/cart/api/getAll',
             success: (data) => {
-                localStorage.setItem('cart', data);
+                localStorage.setItem('cart', JSON.stringify(data));
             }
         })
     });

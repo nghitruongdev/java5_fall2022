@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cart")
@@ -59,8 +57,15 @@ public class CartController {
 
     @RequestMapping("/api/getAll")
     @ResponseBody
-    public Map<String, Product> saveMap() {
-        return cart.getMap();
+    public Collection<Product> saveMap() {
+        return cart.getItems();
+    }
+
+    @PostMapping(value = "/api/load", consumes = {"application/json"})
+    @ResponseBody
+    public int load(@RequestBody List<Product> list) {
+        cart.addItems(list);
+        return cart.getCount();
     }
 
     private String getPreviousPage() {

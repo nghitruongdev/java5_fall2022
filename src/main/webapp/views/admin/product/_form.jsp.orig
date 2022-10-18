@@ -2,6 +2,7 @@
 <form:form action="#" modelAttribute="product" method="post" enctype="multipart/form-data"
            class="card border-0  needs-validation" novalidate="true">
     <form:input path="id" type="hidden"/>
+<<<<<<< HEAD
     <div class="row mt-3">
         <div class="col-6 mt-4">
             <div class="card shadow rounded-3 mx-auto w-75">
@@ -12,6 +13,15 @@
             </div>
             <div class="mt-4 d-flex">
                     <%--                <label for="imageUpload" class="btn btn-success text-center px-4 mx-auto">Upload</label>--%>
+=======
+    <div class="row">
+        <div class="col-6" class="">
+            <div class="">
+                <img src="../../../assets/images/product_01.jpg" alt="" class="img-fluid">
+            </div>
+            <div class="mt-2">
+                <label for="imageUpload" class="btn btn-success text-center bg-secondary px-4">Upload</label>
+>>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
                 <input type="file" name="attach" id="imageUpload" class="d-none" accept=".png, .jpg, .jpeg"/>
             </div>
 
@@ -21,6 +31,11 @@
                 <form:label path="category" cssClass="form-label">Category</form:label>
                 <form:select path="category" cssClass="form-select" cssErrorClass="form-select is-invalid"
                              aria-label="category" items="${categories}" itemLabel="name">
+<<<<<<< HEAD
+=======
+                    <%--                                            <option selected>Open this select menu</option>--%>
+                    <%--                    <form:options items="${categories}" itemLabel="name"/>--%>
+>>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
                 </form:select>
                 <div class="invalid-feedback px-2">
                     <form:errors path="category"/>
@@ -58,12 +73,18 @@
                     <form:errors path="description"/>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="text-end">
                 <button class="btn btn-success" formaction="/admin/products/save">Save</button>
                 <button class="btn btn-danger" formaction="/admin/products/delete">Delete</button>
                 <a href="/admin/products/clear" class="btn btn-secondary">Reset</a>
             </div>
 
+=======
+            <button class="btn btn-primary" formaction="/admin/products/save">Save</button>
+            <button class="btn btn-primary" formaction="/admin/products/delete">Delete</button>
+            <a href="/admin/products/clear" class="btn btn-primary">Reset</a>
+>>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
         </div>
     </div>
 </form:form>

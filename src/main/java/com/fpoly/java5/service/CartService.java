@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 @SessionScope
@@ -60,6 +57,11 @@ public class CartService {
                 .map(product -> product.getQuantity())
                 .reduce(Integer::sum).orElse(0);
     }
+
+    public void addItems(List<Product> list) {
+        list.stream().forEach(item -> map.put(item.getId(), item));
+    }
+
 
     public Map<String, Product> getMap() {
         return map;

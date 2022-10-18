@@ -63,6 +63,7 @@ public class CategoryController {
         int end = begin + total - 1;
         end = end > lastPage ? lastPage : end;
         begin = end - total + 1;
+        begin = begin >= 0 ? begin : 0;
         model.addAttribute("begin", begin);
         model.addAttribute("end", end);
         model.addAttribute("pages", new int[page.getTotalPages()]);

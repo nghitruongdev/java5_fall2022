@@ -40,6 +40,7 @@
                     <td>${item.quantity}</td>
                     <td>${item.description}</td>
                     <td>${item.category.name}</td>
+<<<<<<< HEAD
                     <td>
                         <div class="d-flex">
                             <a href="/admin/products/${item.id}"
@@ -55,6 +56,9 @@
                         </div>
 
                     </td>
+=======
+                    <td><a href="/admin/products/${item.id}">Edit</a></td>
+>>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250
                 </tr>
             </c:forEach>
             </tbody>
