@@ -10,12 +10,12 @@
             </div>
             <div class="col-md-8">
                 <div class="contact-form">
-                    <form id="contact" action="${pageContext.request.contextPath}/contact/sent" method="post" enctype="multipart/form-data">
+                    <form id="contact" action="/contact/sent" method="post" enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <fieldset>
-                                    <input name="from" type="text" class="form-control" id="name"
+                                    <input name="fullName" type="text" class="form-control" id="name"
                                            placeholder="Full Name" required="">
                                 </fieldset>
                             </div>

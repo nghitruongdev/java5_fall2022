@@ -5,13 +5,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+
 @Getter
 @Setter
 @ToString
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false, length = 50)
@@ -30,7 +32,7 @@ public class Product {
     private String categoryId;
     @ToString.Exclude
     @OneToMany(mappedBy = "product")
-    private List<OrderDetail> orderDetailsById;
+    private transient List<OrderDetail> orderDetailsById;
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")

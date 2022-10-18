@@ -5,13 +5,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+
 @Getter
 @Setter
 @ToString
 @Entity
 @Table(name = "categories")
-public class Category {
+public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false, length = 50)
@@ -22,5 +24,5 @@ public class Category {
     private String note;
     @ToString.Exclude
     @OneToMany(mappedBy = "category")
-    private List<Product> productsById;
+    private transient List<Product> productsById;
 }

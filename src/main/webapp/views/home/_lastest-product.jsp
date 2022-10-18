@@ -11,26 +11,8 @@
             </div>
             <c:forEach items="${products}" varStatus="status" var="item">
                 <div class="col-md-4">
-                    <div class="product-item">
-                        <a href="/cart/add/${item.id}"><img src="assets/images/product_01.jpg" alt=""></a>
-                            <%--    <a href="#"><img src="${item.img}" alt=""></a>--%>
-                        <div class="down-content">
-                            <a href="#">
-                                <h4>${item.name}</h4>
-                            </a>
-                            <h6><fmt:formatNumber value="${item.price}"
-                                                  type="CURRENCY" currencyCode="VND"/></h6>
-                            <p>${item.description}</p>
-                            <ul class="stars">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
-                            <span>Reviews (24)</span>
-                        </div>
-                    </div>
+                    <c:set value="${item}" var="item" scope="request"/>
+                    <c:import url="../product/_product-card.jsp"/>
                 </div>
             </c:forEach>
         </div>

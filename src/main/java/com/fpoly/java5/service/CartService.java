@@ -61,6 +61,10 @@ public class CartService {
                 .reduce(Integer::sum).orElse(0);
     }
 
+    public Map<String, Product> getMap() {
+        return map;
+    }
+
     public Collection<Product> getItems() {
         return map.values();
     }

@@ -19,8 +19,17 @@
         }
     }
 </script>
-<script>
-    // $(() => {
-    //     $('#modalSignin').modal('show');
-    // });
+<script type="text/javascript">
+    $(() => {
+        if (!sessionStorage.getItem("isLoaded")) {
+
+        }
+        sessionStorage.setItem("isLoaded", true);
+        $.ajax({
+            url: '/cart/api/getAll',
+            success: (data) => {
+                localStorage.setItem('cart', data);
+            }
+        })
+    });
 </script>
