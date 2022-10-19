@@ -27,8 +27,7 @@ public class UserAdminController {
     final String USER_INDEX = "admin/user/index";
 
     @RequestMapping
-    public String openProductPage(@ModelAttribute User user) {
-//        product.setId("SP" + service.count());
+    public String openUserPage(@ModelAttribute User user) {
         return USER_INDEX;
     }
 

@@ -42,10 +42,11 @@ public class AccountController {
         boolean isAdmin = ((User) session.get("loggedInUser").orElse(new User())).isAdmin();
         if (result) {
             String securityUri = (String) session.get("security-uri").orElse("");
-            return !securityUri.isEmpty() ? securityUri :
-                    isAdmin ? "redirect:/admin" : "redirect:" + getPreviousPage();
+            String redirect = "redirect:%s";
+            return !securityUri.isEmpty() ? String.format(redirect, securityUri) :
+                    isAdmin ? String.format(redirect, "/admin") : String.format(redirect, getPreviousPage());
         }
-        return "redirect:/account/login";
+        return "auth/login";
     }
 
     // Logout -> return to index

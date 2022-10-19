@@ -27,8 +27,8 @@
     </style>
 </head>
 <body>
-    <c:import url="../layout/_header.jsp"/>
-    <div class="container" style="padding-top: 100px;">
+<c:import url="../layout/_header.jsp"/>
+<div class="container" style="padding-top: 100px;">
     <div class="row">
         <div class="col-lg-5 col-md-6 col-8 mx-auto">
             <div class="card flex-row border-0 shadow rounded-3 overflow-hidden">
@@ -43,29 +43,32 @@
                     </div>
                     <h5 class="card-title lead text-muted mb-3 fw-light">Welcome Back!</h5>
 
-                    <form name="loginForm" class="needs-validation" novalidate>
+                    <form action="/account/login" method="post" name="loginForm" class="needs-validation" novalidate>
 
                         <div class="form-floating mb-3 has-validation">
-                            <input ng-model="username" ng-minlength="3" ng-max-length="20" type="text" name="un"
-                                   class="form-control {{(loginForm.un.$untouched && !loginForm.un.$dirty)? '' : loginForm.un.$invalid? 'is-invalid':'is-valid'}}"
+                            <input type="text" name="username"
+                                   class="form-control"
+                                   value="${savedUser.username}"
                                    id="username" placeholder=" " required>
                             <label class="text-muted fw-light" for="username">Nhập username</label>
-<%--                            <div class="invalid-feedback">Nhập username từ 3 đến 20 kí tự.</div>--%>
+                            <%--                            <div class="invalid-feedback">Nhập username từ 3 đến 20 kí tự.</div>--%>
                         </div>
 
                         <div class="form-floating mb-3 has-validation">
-                            <input ng-model="password" ng-minlength="6" ng-pattern="/^[a-zA-Z0-9-]*$/" type="password"
-                                   name="pw"
-                                   class="form-control {{(loginForm.pw.$untouched && !loginForm.pw.$dirty)? '' : loginForm.pw.$invalid? 'is-invalid':'is-valid'}}"
+                            <input type="password"
+                                   name="password"
+                                   value="${savedUser.password}"
+                                   class="form-control"
                                    id="password" placeholder=" " required>
                             <label class="text-muted fw-light" for="password">Nhập password</label>
-<%--                            <div class="invalid-feedback">Nhập A-z, 0-9, '-' và từ 6 kí tự trở lên.</div>--%>
+                            <%--                            <div class="invalid-feedback">Nhập A-z, 0-9, '-' và từ 6 kí tự trở lên.</div>--%>
                         </div>
 
 
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" ng-model="isRemember"
-                                   id="rememberPasswordCheck">
+                            <input class="form-check-input" type="checkbox"
+                                   id="rememberPasswordCheck" value="true"
+                                   name="remember"  ${savedUser != null ? 'checked' : ''}>
                             <label class="form-check-label fw-light" for="rememberPasswordCheck">
                                 Ghi nhớ mật khẩu
                             </label>
@@ -101,7 +104,7 @@
         </div>
     </div>
 </div>
-    <c:import url="../../assets/common-link/common-js.jsp"/>
+<c:import url="../../assets/common-link/common-js.jsp"/>
 
 </body>
 </html>
