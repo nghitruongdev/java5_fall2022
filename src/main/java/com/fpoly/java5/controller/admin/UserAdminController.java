@@ -1,6 +1,7 @@
 package com.fpoly.java5.controller.admin;
 
 import com.fpoly.java5.model.entity.User;
+import com.fpoly.java5.service.SessionService;
 import com.fpoly.java5.service.UploadService;
 import com.fpoly.java5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UserAdminController {
     UserService service;
     @Autowired
     UploadService upload;
+
+    @Autowired
+    SessionService session;
     final String USER_INDEX = "admin/user/index";
 
     @RequestMapping
@@ -31,11 +35,11 @@ public class UserAdminController {
         return USER_INDEX;
     }
 
-    @RequestMapping("/{id}")
-    public String openProduct(Model model, @PathVariable Integer id) {
-        model.addAttribute("product", service.findById(id).orElse(new User()));
-        return USER_INDEX;
-    }
+//    @RequestMapping("/{id}")
+//    public String openUser(Model model, @PathVariable Integer id) {
+//        model.addAttribute("user", service.findById(id).orElse(new User()));
+//        return USER_INDEX;
+//    }
 
     @RequestMapping("/clear")
     public String clear() {
@@ -47,26 +51,31 @@ public class UserAdminController {
                        BindingResult result,
                        MultipartFile attach,
                        Model model) throws IOException {
-//        if (!attach.isEmpty()) user.set(upload.saveFile(attach));
+        if (!attach.isEmpty()) user.setImg(upload.saveFile(attach));
         if (!result.hasErrors()) {
             service.save(user);
             model.addAttribute("message", "Lưu user thành công !");
             model.addAttribute("users", getUsers());
         } else {
-            model.addAttribute("message", "Vui lòng kiểm tra lại thông tin sản phẩm!");
+            model.addAttribute("message", "Vui lòng kiểm tra lại thông tin user!");
         }
         return USER_INDEX;
     }
 
     @PostMapping("/delete")
     public String delete(@ModelAttribute User user, Model model) {
+        User loggedInUser = (User) session.get("loggedInUser").orElse(new User());
         if (service.existsById(user.getId())) {
-            service.deleteById(user.getId());
-            model.addAttribute("message", "Xoá sản phẩm thành công");
+            if (loggedInUser.getUsername() != null && loggedInUser.getUsername().equals(user.getUsername())) {
+                model.addAttribute("message", "Bạn không thể xoá chính mình!");
+            } else {
+                service.deleteById(user.getId());
+                model.addAttribute("message", "Xoá user thành công");
+            }
         } else {
-            model.addAttribute("message", "Không tìm thấy sản phẩm cần xoá!");
+            model.addAttribute("message", "Không tìm thấy user cần xoá!");
         }
-        return "redirect:/admin/products";
+        return "redirect:/admin/users";
     }
 
     @ModelAttribute("users")

@@ -1,8 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-table me-1"></i>
-        User Table
+<div class="card mb-4 mt-4">
+    <div class="card-header d-flex justify-content-between">
+        <p><i class="fas fa-table me-1"></i>
+            User Table</p>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#detail-0">
+            New User
+        </button>
     </div>
     <div class="card-body">
         <table id="datatablesSimple">
@@ -42,18 +46,19 @@
                     <td>${item.admin? 'Admin' : 'User'}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="/admin/products/${item.id}"
-                               class="btn text-secondary">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <form action="/admin/products/delete" class="px-0 mx-0" method="post">
+                            <div type="button" class="btn" data-bs-toggle="modal"
+                                 data-bs-target="#detail-${item.id}">
+                                <span class="fa fa-edit text-secondary"></span>
+                            </div>
+                            <c:set var="u" value="${item}" scope="request"/>
+                            <c:import url="_form.jsp"/>
+                            <form action="/admin/users/delete" class="px-0 mx-0" method="post">
                                 <input type="hidden" name="id" value="${item.id}">
                                 <button class="btn">
                                     <i class="fa fa-trash text-danger"></i>
                                 </button>
                             </form>
                         </div>
-
                     </td>
                 </tr>
             </c:forEach>
