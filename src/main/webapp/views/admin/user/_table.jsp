@@ -38,29 +38,44 @@
             <c:forEach items="${users}" var="item" varStatus="status">
                 <tr>
                     <td>${item.id}</td>
-                    <td><img src="/upload/${item.img}" alt="${item.username}" class="img-fluid"></td>
+                    <td>
+                        <c:choose>
+                            <c:when test='${item.img != null && !item.img.equals("")}'>
+                                <img src="/upload/${item.img}" alt="${item.username}" width="35" height="35"
+                                     class="rounded-circle img-fluid">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="https://github.com/mdo.png" alt="mdo" width="35" height="35"
+                                     class="rounded-circle img-fluid">
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>${item.username}</td>
                     <td>${item.fullName}</td>
                     <td>${item.email}</td>
                     <td>${item.phone}</td>
                     <td>${item.admin? 'Admin' : 'User'}</td>
-                    <td>
+                    <td style="width: 100px;">
                         <div class="d-flex">
                             <div type="button" class="btn" data-bs-toggle="modal"
                                  data-bs-target="#detail-${item.id}">
                                 <span class="fa fa-edit text-secondary"></span>
                             </div>
-                            <c:set var="u" value="${item}" scope="request"/>
-                            <c:import url="_form.jsp"/>
-                            <form action="/admin/users/delete" class="px-0 mx-0" method="post">
-                                <input type="hidden" name="id" value="${item.id}">
-                                <button class="btn">
-                                    <i class="fa fa-trash text-danger"></i>
-                                </button>
-                            </form>
+
+                            <div class="">
+                                <form action="/admin/users/delete" class="px-0 mx-0" method="post">
+                                    <input type="hidden" name="id" value="${item.id}">
+                                    <button class="btn">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </button>
+                                </form>
+                            </div>
+
                         </div>
                     </td>
                 </tr>
+                <c:set var="u" value="${item}" scope="request"/>
+                <c:import url="_form.jsp"/>
             </c:forEach>
             </tbody>
         </table>

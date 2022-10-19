@@ -5,10 +5,10 @@
 <div class="modal fade" id="detail-${u.id}" data-bs-backdrop="static" data-bs-keyboard="false"
      tabindex="-1" aria-labelledby="detail-${u.id}-label" aria-hidden="true">
     <div class="modal-dialog modal-lg p-0">
-        <div class="modal-content p-o">
+        <div class="modal-content p-0">
             <div class="modal-body p-0">
                 <form:form action="/student/save" method="post" enctype="multipart/form-data" modelAttribute="u"
-                           class="card border-0  shadow row mx-auto needs-validation" novalidate="true">
+                           class="card border-0  shadow mx-auto needs-validation" novalidate="true">
                     <div class="card-up d-flex justify-content-end p-2">
                         <button type="button" class="btn-close btn btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
@@ -41,7 +41,9 @@
                     </div>
                     <div class="px-4">
                         <p class=" h2 mt-3">Enter your details</p>
-                        <form:input path="id" type="hidden"/>
+                        <form:hidden path="id"/>
+                        <form:hidden path="password"/>
+                        for
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <form:label path="username" for="username" cssClass="form-label">Username</form:label>

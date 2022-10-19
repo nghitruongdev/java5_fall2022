@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Controller
 public class CategoryController {
-    private static final int PAGE_SIZE = 1;
+    private static final int PAGE_SIZE = 6;
     @Autowired
     ProductService productService;
 

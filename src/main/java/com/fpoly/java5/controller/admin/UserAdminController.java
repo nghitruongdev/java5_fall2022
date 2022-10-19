@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -64,16 +61,20 @@ public class UserAdminController {
 
     @PostMapping("/delete")
     public String delete(@ModelAttribute User user, Model model) {
-        User loggedInUser = (User) session.get("loggedInUser").orElse(new User());
-        if (service.existsById(user.getId())) {
-            if (loggedInUser.getUsername() != null && loggedInUser.getUsername().equals(user.getUsername())) {
-                model.addAttribute("message", "Bạn không thể xoá chính mình!");
+        try {
+            User loggedInUser = (User) session.get("loggedInUser").orElse(new User());
+            if (service.existsById(user.getId())) {
+                if (loggedInUser.getUsername() != null && loggedInUser.getUsername().equals(user.getUsername())) {
+                    model.addAttribute("message", "Bạn không thể xoá chính mình!");
+                } else {
+                    service.deleteById(user.getId());
+                    model.addAttribute("message", "Xoá user thành công");
+                }
             } else {
-                service.deleteById(user.getId());
-                model.addAttribute("message", "Xoá user thành công");
+                model.addAttribute("message", "Không tìm thấy user cần xoá!");
             }
-        } else {
-            model.addAttribute("message", "Không tìm thấy user cần xoá!");
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
         }
         return "redirect:/admin/users";
     }

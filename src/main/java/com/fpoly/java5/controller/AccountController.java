@@ -44,7 +44,7 @@ public class AccountController {
             String securityUri = (String) session.get("security-uri").orElse("");
             String redirect = "redirect:%s";
             return !securityUri.isEmpty() ? String.format(redirect, securityUri) :
-                    isAdmin ? String.format(redirect, "/admin") : String.format(redirect, getPreviousPage());
+                    isAdmin ? String.format(redirect, "/admin/users") : String.format(redirect, getPreviousPage());
         }
         return "auth/login";
     }

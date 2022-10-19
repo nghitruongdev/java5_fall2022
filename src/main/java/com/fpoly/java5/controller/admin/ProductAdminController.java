@@ -61,11 +61,15 @@ public class ProductAdminController {
 
     @PostMapping("/delete")
     public String delete(@ModelAttribute Product product, Model model) {
-        if (service.existsById(product.getId())) {
-            service.deleteById(product.getId());
-            model.addAttribute("message", "Xoá sản phẩm thành công");
-        } else {
-            model.addAttribute("message", "Không tìm thấy sản phẩm cần xoá!");
+        try {
+            if (service.existsById(product.getId())) {
+                service.deleteById(product.getId());
+                model.addAttribute("message", "Xoá sản phẩm thành công");
+            } else {
+                model.addAttribute("message", "Không tìm thấy sản phẩm cần xoá!");
+            }
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
         }
         return "redirect:/admin/products";
     }

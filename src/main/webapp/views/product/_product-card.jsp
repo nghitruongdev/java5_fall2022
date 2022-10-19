@@ -1,6 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="product-item">
-    <a href="#"><img src="${item.img != null? item.img : '../../assets/images/product_01.jpg'}" alt=""></a>
+    <a href="#"><img src='/upload/${item.img != null || !item.img.equals("")? item.img : "default.png"}' alt=""></a>
     <div class="down-content">
         <a href="#">
             <h4>${item.name}</h4>

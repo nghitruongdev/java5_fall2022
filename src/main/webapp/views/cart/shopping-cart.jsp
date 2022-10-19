@@ -40,7 +40,7 @@
                                                 <!-- Image -->
                                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                                      data-mdb-ripple-color="light">
-                                                    <img src="${item.img}"
+                                                    <img src="/upload/${item.img != null? item.img : 'default.png'}"
                                                          class="w-100" alt="${item.name}"/>
                                                     <a href="#!">
                                                         <div class="mask"

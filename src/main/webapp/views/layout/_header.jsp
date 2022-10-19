@@ -51,8 +51,20 @@
                         <li class="nav-item dropdown text-left mt-2">
                             <a class=" p-0 text-white" href="#" role="button" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="mdo" width="35" height="35"
-                                     class="rounded-circle img-fluid">
+                                <c:choose>
+                                    <c:when test='${loggedInUser.img != null && !loggedInUser.img.equals("")}'>
+                                        <img src="/upload/${loggedInUser.img}" alt="${loggedInUser.username}" width="35"
+                                             height="35"
+                                             class="rounded-circle img-fluid">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="https://github.com/mdo.png" alt="${loggedInUser.username}" width="35"
+                                             height="35"
+                                             class="rounded-circle img-fluid">
+                                    </c:otherwise>
+                                </c:choose>
+                                    <%--                                <img src="https://github.com/mdo.png" alt="mdo" width="35" height="35"--%>
+                                    <%--                                     class="rounded-circle img-fluid">--%>
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Action</a>
