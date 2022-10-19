@@ -34,7 +34,7 @@ public class CartService {
 
     private Product orderProduct(Product product, int quantity) {
 //        int stock = service.findById(product.getId()).get().getQuantity();
-        if (quantity <= 0) throw new RuntimeException("Số lượng sản phẩm không hợp lệ");
+        if (quantity < 0) throw new RuntimeException("Số lượng sản phẩm không hợp lệ");
 //        if (quantity > stock) throw new RuntimeException("Không ")
         product.setQuantity(quantity);
         return product;

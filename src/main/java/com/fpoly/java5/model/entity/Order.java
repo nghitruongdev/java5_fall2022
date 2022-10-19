@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,11 +27,18 @@ public class Order {
     @Column(name = "address", nullable = false, length = 255)
     private String address;
     @ToString.Exclude
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetail> orderDetailsById;
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.ALL})
+    private List<OrderDetail> orderDetailsById = new ArrayList<>();
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    public OrderDetail addOrderDetail(Product p) {
+        OrderDetail detail = new OrderDetail();
+        detail.setOrder(this);
+        p.placeOrder(detail);
+        orderDetailsById.add(detail);
+        return detail;
+    }
 }

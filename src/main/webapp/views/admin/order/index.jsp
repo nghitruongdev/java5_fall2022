@@ -6,7 +6,8 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
     <link href="../../../assets/css/styles.css" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <title>VNCO - Product Management</title>
+
+    <title>VNCO - Order Management</title>
 </head>
 <body>
 <div id="layoutSidenav">
@@ -92,8 +93,6 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <c:import url="_form.jsp"/>
-
                 <c:import url="_table.jsp"/>
             </div>
         </main>
@@ -110,7 +109,4 @@
 <script src="../../../assets/js/datatables-simple-demo.js"></script>
 </body>
 </html>
-<<<<<<< HEAD
 
-=======
->>>>>>> c9b55c7cdd64a2cb7ec0ce7dc0bcdabdd65bb250

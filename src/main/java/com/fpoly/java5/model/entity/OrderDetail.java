@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+
 @Getter
 @Setter
 @ToString
@@ -32,4 +33,7 @@ public class OrderDetail {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
+    public double getTotal() {
+        return price * quantity;
+    }
 }

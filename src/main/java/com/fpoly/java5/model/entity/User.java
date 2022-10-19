@@ -60,4 +60,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> ordersById;
 
+    @Column(name = "img", nullable = true, length = 50)
+    private String img;
+
+    @Column(name = "address", nullable = true, length = 255)
+    private String address;
 }

@@ -56,4 +56,10 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    public OrderDetail placeOrder(OrderDetail detail) {
+        detail.setProduct(this);
+        detail.setPrice(price);
+        detail.setQuantity(quantity);
+        return detail;
+    }
 }

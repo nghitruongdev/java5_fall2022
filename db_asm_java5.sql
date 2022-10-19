@@ -9,59 +9,69 @@
 
 # Run the script by root account
 uninstall plugin validate_password;
-# UNINSTALL COMPONENT 'file://component_validate_password';
+#
+UNINSTALL COMPONENT 'file://component_validate_password';
 
-DROP DATABASE IF EXISTS `shop_java5`;
+DROP
+DATABASE IF EXISTS `shop_java5`;
 
-CREATE DATABASE IF NOT EXISTS `shop_java5`;
+CREATE
+DATABASE IF NOT EXISTS `shop_java5`;
 
-DROP USER IF EXISTS 'spring_user'@'%';
+DROP
+USER IF EXISTS 'spring_user'@'%';
 
-CREATE USER 'spring_user'@'%' IDENTIFIED BY 'password';
+CREATE
+USER 'spring_user'@'%' IDENTIFIED BY 'password';
 
-GRANT ALL ON `shop_java5`.* TO 'spring_user'@'%';
+GRANT ALL
+ON `shop_java5`.* TO 'spring_user'@'%';
 
-FLUSH PRIVILEGES;
+FLUSH
+PRIVILEGES;
 
 
-USE `shop_java5`;
+USE
+`shop_java5`;
 
 CREATE TABLE categories
 (
     id   NVARCHAR(50) PRIMARY KEY,
     name NVARCHAR(255) NULL,
-    note LONGTEXT      NULL
+    note LONGTEXT NULL
 );
 
 CREATE TABLE `products`
 (
-    id          NVARCHAR(50) PRIMARY KEY ,
-    name        NVARCHAR(255)  NULL,
+    id          NVARCHAR(50) PRIMARY KEY,
+    name        NVARCHAR(255) NULL,
     price       DECIMAL(12, 3) NULL,
-    description LONGTEXT       NULL,
-    img         NVARCHAR(255)  NULL,
-    quantity    INT            NULL,
+    description LONGTEXT NULL,
+    img         NVARCHAR(255) NULL,
+    quantity    INT NULL,
     category_id NVARCHAR(50)
 );
 
 CREATE TABLE `users`
 (
-    id         INT AUTO_INCREMENT PRIMARY KEY ,
-    username   NVARCHAR(50)       NOT NULL,
-    `password` NVARCHAR(50)       NULL,
-    full_name  NVARCHAR(50)       NULL,
-    email      NVARCHAR(50)       NULL,
-    phone      NCHAR(10)          NULL,
-    `role`     INT                NULL
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    username   NVARCHAR(50) NOT NULL,
+    `password` NVARCHAR(50) NULL,
+    full_name  NVARCHAR(50) NULL,
+    email      NVARCHAR(50) NULL,
+    phone      NCHAR(10) NULL,
+    `role`     INT NULL,
+    img        NVARCHAR(50) NULL,
+    address    NVARCHAR(255) NULL
 );
 
 CREATE TABLE `orders`
 (
-    id      INT AUTO_INCREMENT PRIMARY KEY ,
+    id      INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    total   DECIMAL(12, 3)     NOT NULL,
-    phone   VARCHAR(11)        NOT NULL,
-    address NVARCHAR(255)      NOT NULL
+    total   DECIMAL(12, 3) NOT NULL,
+    phone   VARCHAR(11)    NOT NULL,
+    address NVARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `order_details`
@@ -69,8 +79,8 @@ CREATE TABLE `order_details`
     id         INT AUTO_INCREMENT PRIMARY KEY,
     order_id   INT,
     product_id NVARCHAR(50),
-    quantity   INT                NOT NULL,
-    price      DECIMAL(12, 3)     NOT NULL
+    quantity   INT            NOT NULL,
+    price      DECIMAL(12, 3) NOT NULL
 );
 
 ALTER TABLE `products`
@@ -88,7 +98,10 @@ ALTER TABLE `order_details`
     ADD CONSTRAINT fk_orders_order_details FOREIGN KEY (order_id) REFERENCES `orders` (id)
         ON UPDATE CASCADE ON DELETE NO ACTION,
     ADD CONSTRAINT fk_orders_products FOREIGN KEY (product_id) REFERENCES `products` (id)
-        ON UPDATE CASCADE ON DELETE NO ACTION
+        ON
+UPDATE CASCADE
+ON
+DELETE NO ACTION
 ;
 
 INSERT INTO categories(id, name, note)

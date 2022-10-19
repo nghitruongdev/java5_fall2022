@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AccountController {
 
@@ -25,6 +27,9 @@ public class AccountController {
     @Autowired
     SessionService session;
 
+    @Autowired
+    HttpServletRequest request;
+
     @PostMapping("/account/login") // Login
     public String login(Model model, User user) {
         boolean result = loginService.login(user);
@@ -33,7 +38,7 @@ public class AccountController {
         return result ?
                 ((User) session.get("loggedInUser").orElse(new User())).isAdmin() ?
                         "redirect:/admin" :
-                        "redirect:/" :
+                        "redirect:" + getPreviousPage() :
                 "redirect:/";
 
     }
@@ -99,5 +104,10 @@ public class AccountController {
         }
         return "forgot";
     }
+
+    private String getPreviousPage() {
+        return request.getHeader("Referer");
+    }
+
 
 }
