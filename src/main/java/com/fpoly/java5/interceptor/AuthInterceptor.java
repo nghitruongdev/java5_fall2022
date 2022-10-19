@@ -23,6 +23,20 @@ public class AuthInterceptor implements HandlerInterceptor {
         boolean isAdmin = isLoggedIn && loggedInUser.isAdmin();
         boolean isAdminPage = uri.startsWith("/admin");
         boolean isCheckoutPage = uri.contains("/checkout");
+
+        if (isAdminPage) {
+            if (!isLoggedIn) {
+                session.add("security-uri", uri);
+                response.sendRedirect("/account/login");
+            } else if (!isAdmin) {
+                response.sendRedirect("/");
+            }
+        } else if (isCheckoutPage) {
+            if (!isLoggedIn) {
+                session.add("security-uri", uri);
+                response.sendRedirect("/account/login");
+            }
+        }
         return isCheckoutPage && isLoggedIn || isAdminPage && isAdmin;
     }
 }

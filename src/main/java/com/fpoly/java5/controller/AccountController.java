@@ -30,17 +30,22 @@ public class AccountController {
     @Autowired
     HttpServletRequest request;
 
+    @RequestMapping("/account/login")
+    public String openLogin(@ModelAttribute User user) {
+        return "auth/login";
+    }
+
     @PostMapping("/account/login") // Login
     public String login(Model model, User user) {
         boolean result = loginService.login(user);
         model.addAttribute("message", result ? "Login Thành Công!" : "Login Thất Bại");
-
-        return result ?
-                ((User) session.get("loggedInUser").orElse(new User())).isAdmin() ?
-                        "redirect:/admin" :
-                        "redirect:" + getPreviousPage() :
-                "redirect:/";
-
+        boolean isAdmin = ((User) session.get("loggedInUser").orElse(new User())).isAdmin();
+        if (result) {
+            String securityUri = (String) session.get("security-uri").orElse("");
+            return !securityUri.isEmpty() ? securityUri :
+                    isAdmin ? "redirect:/admin" : "redirect:" + getPreviousPage();
+        }
+        return "redirect:/account/login";
     }
 
     // Logout -> return to index
