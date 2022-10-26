@@ -44,9 +44,9 @@ public class UserAdminController {
     }
 
     @PostMapping("/save")
-    public String save(@Validated @ModelAttribute("user") User user,
-                       BindingResult result,
+    public String save(@ModelAttribute("user") User user,
                        MultipartFile attach,
+                       BindingResult result,
                        Model model) throws IOException {
         if (!attach.isEmpty()) user.setImg(upload.saveFile(attach));
         if (!result.hasErrors()) {
@@ -56,7 +56,7 @@ public class UserAdminController {
         } else {
             model.addAttribute("message", "Vui lòng kiểm tra lại thông tin user!");
         }
-        return USER_INDEX;
+        return "redirect:/admin/users";
     }
 
     @PostMapping("/delete")

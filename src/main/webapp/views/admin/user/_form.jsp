@@ -13,6 +13,7 @@
                         <button type="button" class="btn-close btn btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
+                    <form:hidden path="password" value="${u.password != null? u.password : '123'}"/>
                     <div class="avatar shadow border position-relative mx-auto">
                         <label id="btn-upload" for="imageUpload"
                                class="btn position-absolute top-100 start-100 rounded-circle px-2 py-1">
@@ -43,7 +44,6 @@
                         <p class=" h2 mt-3">Enter your details</p>
                         <form:hidden path="id"/>
                         <form:hidden path="password"/>
-                        for
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <form:label path="username" for="username" cssClass="form-label">Username</form:label>
